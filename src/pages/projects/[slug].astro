@@ -19,6 +19,7 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { title, description, category, plan, before, after, gallery, testimonial, testimonialAuthor } =
   entry.data;
 
@@ -104,7 +105,7 @@ const categoryColors: Record<string, string> = {
     <!-- Back -->
     <div class="pt-8 border-t border-dun-dark">
       <a
-        href={import.meta.env.BASE_URL}
+        href={`${base}/`}
         class="text-xs font-light tracking-widest uppercase text-dun-muted hover:text-dun-cream transition flex items-center gap-1.5"
       >
         ← Volver a proyectos
