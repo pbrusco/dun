@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const reforms = allProjects.filter((p) => p.data.category !== 'Patrimonio');
+const patrimony = allProjects.filter((p) => p.data.category === 'Patrimonio');
+---
+
+<Layout title="Proyectos">
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-6 pt-20 pb-12">
+    <header class="max-w-2xl">
+      <h1 class="text-5xl md:text-6xl font-light leading-tight text-dun-cream tracking-wide">
+        Diseñando espacios,<br />preservando historias.
+      </h1>
+      <p class="mt-6 text-lg text-dun-cream-dark leading-relaxed font-light tracking-wide">
+        Arquitecta especializada en la reforma de viviendas y la restauración de patrimonio
+        histórico en Buenos Aires. Proyecto, coordino y dirijo cada obra de principio a fin.
+      </p>
+      <p class="mt-2 text-sm text-dun-muted italic tracking-widest">
+        encontramos la forma de hacer <span class="font-semibold not-italic text-dun-cream-dark">hogar</span>
+      </p>
+    </header>
+  </section>
+
+  <!-- Reformas -->
+  {
+    reforms.length > 0 && (
+      <section class="max-w-7xl mx-auto px-6 py-12">
+        <h2 class="text-xs uppercase tracking-widest text-dun-muted mb-8">
+          Reformas & Interiorismo
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reforms.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Patrimonio -->
+  {
+    patrimony.length > 0 && (
+      <section class="max-w-7xl mx-auto px-6 py-12">
+        <h2 class="text-xs uppercase tracking-widest text-dun-muted mb-8">
+          Restauración de Patrimonio Histórico
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {patrimony.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Empty state -->
+  {
+    allProjects.length === 0 && (
+      <section class="max-w-7xl mx-auto px-6 py-20 text-center text-dun-muted">
+        <p class="text-lg font-light">Los proyectos aparecerán acá una vez que los agregues en <code>src/content/projects/</code>.</p>
+      </section>
+    )
+  }
+</Layout>

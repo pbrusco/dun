@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.claude/
+PARA-DANI.md
+public/fonts_and_palletes.pdf

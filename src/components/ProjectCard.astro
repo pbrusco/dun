@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, cover, category } = project.data;
+
+const categoryColors: Record<string, string> = {
+  Reforma: 'border-dun-muted text-dun-muted',
+  Patrimonio: 'border-dun-cream-dark text-dun-cream-dark',
+  Interiorismo: 'border-dun-cream text-dun-cream',
+};
+---
+
+<a
+  href={`/projects/${project.slug}`}
+  class="group block bg-dun-darker border border-dun-dark overflow-hidden hover:border-dun-muted hover:shadow-xl transition-all duration-300"
+>
+  <div class="relative aspect-[4/3] overflow-hidden">
+    <Image
+      src={cover}
+      alt={`Portada de ${title}`}
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+    />
+    <span
+      class={`absolute top-4 right-4 px-3 py-1 text-xs font-light tracking-widest border ${categoryColors[category] ?? 'border-dun-muted text-dun-muted'}`}
+    >
+      {category}
+    </span>
+  </div>
+  <div class="p-6">
+    <h2 class="text-lg font-light tracking-wide text-dun-cream group-hover:text-white transition">
+      {title}
+    </h2>
+    <p class="mt-2 text-dun-cream-dark text-sm line-clamp-2 font-light">{description}</p>
+    <div class="mt-5 text-xs font-light tracking-widest uppercase text-dun-muted flex items-center gap-1.5">
+      Ver proyecto
+      <span class="group-hover:translate-x-1 transition-transform inline-block">→</span>
+    </div>
+  </div>
+</a>

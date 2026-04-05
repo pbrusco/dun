@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import dani from '../assets/images/dani.jpeg';
+import uba from '../assets/images/uba.jpeg';
+---
+
+<Layout
+  title="Sobre mí"
+  description="Conocé a DUN Arquitectura — especialistas en reformas de departamentos y restauración de patrimonio histórico en Buenos Aires."
+>
+  <section class="max-w-5xl mx-auto px-6 py-20">
+
+    <!-- Hero: foto + nombre -->
+    <div class="flex flex-col md:flex-row gap-12 items-start mb-16">
+      <div class="flex-1">
+        <h1 class="text-5xl font-light tracking-wide text-dun-cream mb-2">Daniela Estevez Vredjian</h1>
+        <p class="text-dun-cream-dark text-sm uppercase tracking-widest mb-8 font-light">Arquitecta · Buenos Aires, Argentina</p>
+        <p class="text-dun-cream-dark leading-relaxed font-light text-lg">
+          Me especializo en la remodelación y ejecución de obras de vivienda y en la restauración y
+          puesta en valor de edificios patrimoniales. Coordino cada etapa del proceso — desde el
+          proyecto hasta la dirección de obra — para que el resultado sea exactamente lo que
+          imaginamos juntos.
+        </p>
+      </div>
+      <div class="w-48 md:w-56 flex-shrink-0">
+        <Image
+          src={dani}
+          alt="Daniela Estevez Vredjian"
+          class="w-full aspect-square object-cover object-center rounded-full"
+        />
+      </div>
+    </div>
+
+    <div class="prose prose-invert prose-lg max-w-none">
+      <p>
+        Trabajo de forma independiente con foco en dos líneas: dar nueva vida a los espacios
+        habitables y preservar el patrimonio arquitectónico que nos identifica como ciudad.
+      </p>
+
+      <h2>Especialidades</h2>
+      <ul>
+        <li>Reforma integral de viviendas — cocinas, baños, departamentos y PH</li>
+        <li>Restauración y puesta en valor de edificios patrimoniales</li>
+        <li>Jefatura y supervisión de obra</li>
+        <li>Inspección técnica y documentación</li>
+        <li>Coordinación y planificación de obra</li>
+      </ul>
+
+      <h2>Proyectos destacados</h2>
+      <ul>
+        <li><strong>Manzana de las Luces</strong> — Restauración de fachadas y cubiertas del Edificio Ex Procuraduría y Ex Casas Redituantes (Ministerio de Cultura de la Nación)</li>
+        <li><strong>Instituto Sanmartiniano</strong> — Restauración de carpinterías</li>
+        <li><strong>Aeroparque J. Newbery</strong> — Remodelación integral de baños preembarque y reparación de cubiertas</li>
+      </ul>
+
+    </div>
+
+    <!-- Formación fuera del prose para poder usar Image -->
+    <div class="mt-10 mb-10">
+      <h2 class="text-xs uppercase tracking-widest text-dun-muted mb-6">Formación</h2>
+      <div class="flex items-start gap-6">
+        <Image src={uba} alt="Universidad de Buenos Aires" class="w-16 h-16 object-contain opacity-80 flex-shrink-0" />
+        <div class="space-y-3 text-sm font-light text-dun-cream-dark">
+          <p><span class="text-dun-cream font-normal">Universidad de Buenos Aires</span> — Arquitecta <span class="text-dun-muted">(2006–2017)</span></p>
+          <p><span class="text-dun-cream font-normal">Universidad de Buenos Aires</span> — Posgrado en Conservación Integral y Rehabilitación del Patrimonio Arquitectónico <span class="text-dun-muted">(2020–2021)</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose prose-invert prose-lg max-w-none">
+
+      <h2>Áreas de trabajo</h2>
+      <p>
+        Ciudad de Buenos Aires y Gran Buenos Aires.
+      </p>
+    </div>
+
+    <div class="mt-12">
+      <a
+        href="#"
+        class="inline-block border border-dun-cream text-dun-cream px-8 py-4 text-xs uppercase tracking-widest font-light hover:bg-dun-cream hover:text-dun-dark transition"
+      >
+        Contactame
+      </a>
+    </div>
+  </section>
+</Layout>
