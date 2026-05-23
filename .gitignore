@@ -8,3 +8,9 @@ dist/
 PARA-DANI.md
 public/fonts_and_palletes.pdf
 public/CNAME
+.DS_Store
+**/.DS_Store
+
+# Source material kept locally (originals from clients, drafts, etc.)
+raw_content/
+

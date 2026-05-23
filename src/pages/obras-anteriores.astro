@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// Manzana de las Luces
+import mll1 from '../assets/images/obras-anteriores/manzana-luces/01.jpg';
+import mll2 from '../assets/images/obras-anteriores/manzana-luces/02-antes.jpg';
+import mll3 from '../assets/images/obras-anteriores/manzana-luces/03-proceso.jpg';
+import mll4 from '../assets/images/obras-anteriores/manzana-luces/04.jpg';
+import mll5 from '../assets/images/obras-anteriores/manzana-luces/05.jpg';
+import mll6 from '../assets/images/obras-anteriores/manzana-luces/06.jpg';
+
+// Museo Sanmartiniano
+import sm1 from '../assets/images/obras-anteriores/sanmartiniano/01.jpg';
+import sm2 from '../assets/images/obras-anteriores/sanmartiniano/02.jpg';
+import sm3 from '../assets/images/obras-anteriores/sanmartiniano/03.jpg';
+import sm4 from '../assets/images/obras-anteriores/sanmartiniano/04.jpg';
+import sm5 from '../assets/images/obras-anteriores/sanmartiniano/05.jpg';
+
+// Aeroparque Newbery
+import an1 from '../assets/images/obras-anteriores/aeroparque-newbery/01.jpg';
+import an2 from '../assets/images/obras-anteriores/aeroparque-newbery/02.jpg';
+import an3 from '../assets/images/obras-anteriores/aeroparque-newbery/03.jpg';
+import an4 from '../assets/images/obras-anteriores/aeroparque-newbery/04.jpg';
+
+// Aeropuerto Ezeiza
+import ez1 from '../assets/images/obras-anteriores/aeropuerto-ezeiza/01.jpg';
+import ez2 from '../assets/images/obras-anteriores/aeropuerto-ezeiza/02.jpg';
+import ez3 from '../assets/images/obras-anteriores/aeropuerto-ezeiza/03.jpg';
+import ez4 from '../assets/images/obras-anteriores/aeropuerto-ezeiza/04.jpg';
+
+// Gimnasios Fitter
+import gf1 from '../assets/images/obras-anteriores/gimnasios-fitter/01.jpg';
+import gf2 from '../assets/images/obras-anteriores/gimnasios-fitter/02.jpeg';
+import gf3 from '../assets/images/obras-anteriores/gimnasios-fitter/03.jpeg';
+import gf4 from '../assets/images/obras-anteriores/gimnasios-fitter/04.jpeg';
+
+const sections = [
+  {
+    title: 'Manzana de las Luces',
+    kicker: 'Restauración de patrimonio',
+    description:
+      'Restauración de envolvente edilicia, fachadas y cubiertas del Edificio Ex Procuraduría y Ex Casas Redituantes (Ministerio de Cultura de la Nación).',
+    images: [mll1, mll2, mll3, mll4, mll5, mll6],
+  },
+  {
+    title: 'Museo Sanmartiniano',
+    kicker: 'Restauración de patrimonio',
+    description: 'Restauración de carpinterías de madera.',
+    images: [sm1, sm2, sm3, sm4, sm5],
+  },
+  {
+    title: 'Aeroparque J. Newbery',
+    kicker: 'Obra de gran escala',
+    description:
+      'Remodelación integral de baños preembarque y reparación de cubiertas.',
+    images: [an1, an2, an3, an4],
+  },
+  {
+    title: 'Aeropuerto Ministro Pistarini · Ezeiza',
+    kicker: 'Obra de gran escala',
+    description: 'Instalaciones y cubiertas.',
+    images: [ez1, ez2, ez3, ez4],
+  },
+  {
+    title: 'Gimnasios Fitter · Megatlon',
+    kicker: 'Obra comercial',
+    description: 'Instalaciones y estética.',
+    images: [gf1, gf2, gf3, gf4],
+  },
+];
+---
+
+<Layout
+  title="Obras anteriores"
+  description="Trabajos a gran escala realizados junto a constructoras y estudios — patrimonio, aeropuertos y obras comerciales."
+>
+  <section class="max-w-6xl mx-auto px-6 pt-10 md:pt-20 pb-8 md:pb-12">
+    <header class="max-w-2xl">
+      <p class="text-xs uppercase tracking-widest text-dun-muted mb-4">Trayectoria</p>
+      <h1 class="text-4xl md:text-5xl font-light leading-tight text-dun-cream tracking-wide">
+        Obras anteriores
+      </h1>
+      <p class="mt-6 text-base md:text-lg text-dun-cream-dark leading-relaxed font-light tracking-wide">
+        Estas obras fueron realizadas en conjunto con empresas constructoras y estudios, dentro
+        del rol de supervisión y dirección técnica.
+      </p>
+    </header>
+  </section>
+
+  {
+    sections.map((s, i) => (
+      <section class="max-w-6xl mx-auto px-6 py-10 md:py-14 border-t border-dun-darker">
+        <div class="mb-8 max-w-2xl">
+          <p class="text-xs uppercase tracking-widest text-dun-muted mb-3">{s.kicker}</p>
+          <h2 class="text-2xl md:text-3xl font-light tracking-wide text-dun-cream">{s.title}</h2>
+          {s.description && (
+            <p class="mt-3 text-dun-cream-dark font-light leading-relaxed">{s.description}</p>
+          )}
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {s.images.map((img) => (
+            <Image
+              src={img}
+              alt={`Obra ${s.title}`}
+              class="w-full aspect-[4/3] object-cover"
+            />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</Layout>

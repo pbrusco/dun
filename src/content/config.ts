@@ -4,12 +4,14 @@ const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      description: z.string(),
+      description: z.string().optional(),
+      location: z.string().optional(),
+      year: z.number().optional(),
       category: z.enum(['Reforma', 'Patrimonio', 'Interiorismo']),
       cover: image(),
       plan: image().optional(),
-      before: image(),
-      after: image(),
+      before: image().optional(),
+      after: image().optional(),
       gallery: z.array(image()).optional(),
       testimonial: z.string().optional(),
       testimonialAuthor: z.string().optional(),
