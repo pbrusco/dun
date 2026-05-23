@@ -85,22 +85,17 @@ const sections = [
   =========================================== -->
   <section class="relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 md:px-10 pt-8 md:pt-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/60 font-light anim-rise">
-      <span>Trayectoria · {String(sections.length).padStart(2, '0')} obras</span>
-      <span class="hidden md:inline">2018 — 2024</span>
-      <span>Buenos Aires</span>
+      <span>Trayectoria</span>
+      <span class="text-right">Buenos Aires</span>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-24 pb-12 md:pb-20 grid grid-cols-12 gap-y-6">
-      <div class="hidden md:block col-span-3 anim-rise" style="--rise-delay: 80ms">
-        <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-3">Obras</p>
-        <span class="dun-numeral text-[8rem] xl:text-[10rem] block leading-[0.8]">{String(sections.length).padStart(2, '0')}</span>
-      </div>
-      <header class="col-span-12 md:col-span-9">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-24 pb-12 md:pb-20">
+      <header>
         <h1 class="anim-rise" style="--rise-delay: 120ms">
-          <span class="block text-[14vw] md:text-[10vw] xl:text-[9rem] font-thin leading-[0.95] tracking-[-0.02em] text-dun-cream">
+          <span class="block text-[12vw] sm:text-[13vw] md:text-[10vw] xl:text-[9rem] font-thin leading-[0.95] tracking-[-0.02em] text-dun-cream">
             Obras
           </span>
-          <span class="block text-[14vw] md:text-[10vw] xl:text-[9rem] font-light leading-[0.95] tracking-[-0.02em] text-dun-cream-dark pl-[10%] md:pl-[18%]">
+          <span class="block text-[12vw] sm:text-[13vw] md:text-[10vw] xl:text-[9rem] font-light leading-[0.95] tracking-[-0.02em] text-dun-cream-dark pl-[10%] md:pl-[18%]">
             anteriores.
           </span>
         </h1>
@@ -120,24 +115,29 @@ const sections = [
   =========================================== -->
   <section class="max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-20" data-reveal>
     <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-8 md:mb-12">Índice</p>
-    <ul class="space-y-1">
+    <ul class="space-y-0">
       {sections.map((s, i) => (
         <li>
-          <a href={`#${s.id}`} class="group relative grid grid-cols-12 items-baseline gap-4 py-4 md:py-5 border-t border-dun-cream/10 hover:border-dun-cream-dark/40 transition-colors">
+          <a href={`#${s.id}`} class="group grid grid-cols-12 items-baseline gap-3 md:gap-4 py-4 md:py-5 border-t border-dun-cream/10 hover:border-dun-cream-dark/40 transition-colors">
             <span class="col-span-2 md:col-span-1 dun-numeral text-2xl md:text-3xl text-dun-muted group-hover:text-dun-cream-dark transition">
               {String(i + 1).padStart(2, '0')}
             </span>
-            <span class="col-span-7 md:col-span-7 text-xl md:text-3xl font-thin tracking-wide text-dun-cream group-hover:text-white transition">
-              {s.title}
-            </span>
-            <span class="col-span-3 md:col-span-3 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark/70 md:text-right">
+            <div class="col-span-10 md:col-span-7">
+              <h3 class="text-xl md:text-3xl font-thin tracking-wide text-dun-cream group-hover:text-white transition leading-[1.1]">
+                {s.title}
+              </h3>
+              <p class="md:hidden mt-1 text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/70">
+                {s.kicker}
+              </p>
+            </div>
+            <span class="hidden md:inline md:col-span-3 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark/70 text-right">
               {s.kicker}
             </span>
-            <span class="hidden md:inline col-span-1 text-right text-dun-cream-dark/60 group-hover:text-dun-cream transition">↓</span>
+            <span class="hidden md:inline md:col-span-1 text-right text-dun-cream-dark/60 group-hover:text-dun-cream transition">↓</span>
           </a>
         </li>
       ))}
-      <li class="border-t border-dun-cream/10"></li>
+      <li class="border-t border-dun-cream/10 h-0"></li>
     </ul>
   </section>
 

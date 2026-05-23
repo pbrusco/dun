@@ -48,13 +48,13 @@ const isActive = (target: string) => {
 
     <!-- Nav -->
     <nav class="bg-dun-dark/90 backdrop-blur-sm border-b border-dun-cream/5 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-5 flex items-center justify-between">
-        <a href={`${base}/`} class="flex items-center hover:opacity-90 transition group">
+      <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-5 flex items-center justify-between gap-3">
+        <a href={`${base}/`} class="flex items-center hover:opacity-90 transition group shrink-0">
           <div class="ring-1 ring-dun-cream/20 group-hover:ring-dun-cream/40 transition rounded-sm p-1">
-            <img src={`${base}/logo2.jpeg`} alt="DUN estudio de arquitectura" class="h-10 md:h-[5rem] w-auto" />
+            <img src={`${base}/logo2.jpeg`} alt="DUN estudio de arquitectura" class="h-9 md:h-[5rem] w-auto" />
           </div>
         </a>
-        <div class="flex items-center gap-4 md:gap-8 text-sm font-light tracking-wider text-dun-cream-dark">
+        <div class="flex items-center gap-3 md:gap-8 text-sm font-light tracking-wider text-dun-cream-dark">
           <a
             href={`${base}/`}
             class:list={[
@@ -65,20 +65,20 @@ const isActive = (target: string) => {
           <a
             href={`${base}/obras-anteriores`}
             class:list={[
-              'hidden md:inline nav-link uppercase tracking-[0.2em] text-[11px]',
+              'nav-link uppercase tracking-[0.18em] md:tracking-[0.2em] text-[10px] md:text-[11px]',
               isActive('/obras-anteriores') && 'is-active',
             ]}
           >Trayectoria</a>
           <a
             href={`${base}/sobre-mi`}
             class:list={[
-              'nav-link uppercase tracking-[0.2em] text-[11px]',
+              'nav-link uppercase tracking-[0.18em] md:tracking-[0.2em] text-[10px] md:text-[11px]',
               isActive('/sobre-mi') && 'is-active',
             ]}
           >Estudio</a>
           <a
             href={`${base}/sobre-mi#contacto`}
-            class="cta-link border border-dun-cream/60 text-dun-cream px-3 py-2 md:px-5 md:py-2.5 text-[11px] uppercase tracking-[0.2em] hover:bg-dun-cream hover:text-dun-dark transition"
+            class="cta-link border border-dun-cream/60 text-dun-cream px-2.5 py-1.5 md:px-5 md:py-2.5 text-[10px] md:text-[11px] uppercase tracking-[0.18em] md:tracking-[0.2em] hover:bg-dun-cream hover:text-dun-dark transition whitespace-nowrap"
           >
             Contacto
           </a>
@@ -164,10 +164,13 @@ const isActive = (target: string) => {
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     font-feature-settings: 'kern', 'liga', 'calt', 'ss01';
+    overflow-x: hidden;
+    width: 100%;
   }
 
   /* ====== Grain overlay — adds atmosphere to the dark teal base ====== */
