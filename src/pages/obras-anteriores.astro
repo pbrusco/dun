@@ -37,34 +37,39 @@ import gf4 from '../assets/images/obras-anteriores/gimnasios-fitter/04.jpeg';
 
 const sections = [
   {
+    id: 'manzana-luces',
     title: 'Manzana de las Luces',
-    kicker: 'Restauración de patrimonio',
+    kicker: 'Patrimonio',
     description:
       'Restauración de envolvente edilicia, fachadas y cubiertas del Edificio Ex Procuraduría y Ex Casas Redituantes (Ministerio de Cultura de la Nación).',
     images: [mll1, mll2, mll3, mll4, mll5, mll6],
   },
   {
+    id: 'sanmartiniano',
     title: 'Museo Sanmartiniano',
-    kicker: 'Restauración de patrimonio',
+    kicker: 'Patrimonio',
     description: 'Restauración de carpinterías de madera.',
     images: [sm1, sm2, sm3, sm4, sm5],
   },
   {
+    id: 'aeroparque-newbery',
     title: 'Aeroparque J. Newbery',
-    kicker: 'Obra de gran escala',
+    kicker: 'Gran escala',
     description:
       'Remodelación integral de baños preembarque y reparación de cubiertas.',
     images: [an1, an2, an3, an4],
   },
   {
-    title: 'Aeropuerto Ministro Pistarini · Ezeiza',
-    kicker: 'Obra de gran escala',
-    description: 'Instalaciones y cubiertas.',
+    id: 'aeropuerto-ezeiza',
+    title: 'Aeropuerto Ministro Pistarini',
+    kicker: 'Gran escala',
+    description: 'Instalaciones y cubiertas — Ezeiza.',
     images: [ez1, ez2, ez3, ez4],
   },
   {
+    id: 'gimnasios-fitter',
     title: 'Gimnasios Fitter · Megatlon',
-    kicker: 'Obra comercial',
+    kicker: 'Comercial',
     description: 'Instalaciones y estética.',
     images: [gf1, gf2, gf3, gf4],
   },
@@ -75,39 +80,120 @@ const sections = [
   title="Obras anteriores"
   description="Trabajos a gran escala realizados junto a constructoras y estudios — patrimonio, aeropuertos y obras comerciales."
 >
-  <section class="max-w-6xl mx-auto px-6 pt-10 md:pt-20 pb-8 md:pb-12">
-    <header class="max-w-2xl">
-      <p class="text-xs uppercase tracking-widest text-dun-muted mb-4">Trayectoria</p>
-      <h1 class="text-4xl md:text-5xl font-light leading-tight text-dun-cream tracking-wide">
-        Obras anteriores
-      </h1>
-      <p class="mt-6 text-base md:text-lg text-dun-cream-dark leading-relaxed font-light tracking-wide">
-        Estas obras fueron realizadas en conjunto con empresas constructoras y estudios, dentro
-        del rol de supervisión y dirección técnica.
-      </p>
-    </header>
+  <!-- ===========================================
+       HERO
+  =========================================== -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-8 md:pt-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/60 font-light anim-rise">
+      <span>Trayectoria · {String(sections.length).padStart(2, '0')} obras</span>
+      <span class="hidden md:inline">2018 — 2024</span>
+      <span>Buenos Aires</span>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-24 pb-12 md:pb-20 grid grid-cols-12 gap-y-6">
+      <div class="hidden md:block col-span-3 anim-rise" style="--rise-delay: 80ms">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-3">Sección</p>
+        <span class="dun-numeral text-[8rem] xl:text-[10rem] block leading-[0.8]">02</span>
+      </div>
+      <header class="col-span-12 md:col-span-9">
+        <h1 class="anim-rise" style="--rise-delay: 120ms">
+          <span class="block text-[14vw] md:text-[10vw] xl:text-[9rem] font-thin leading-[0.95] tracking-[-0.02em] text-dun-cream">
+            Obras
+          </span>
+          <span class="block text-[14vw] md:text-[10vw] xl:text-[9rem] font-light leading-[0.95] tracking-[-0.02em] text-dun-cream-dark pl-[10%] md:pl-[18%]">
+            anteriores.
+          </span>
+        </h1>
+        <p class="mt-10 md:mt-14 max-w-2xl text-base md:text-lg text-dun-cream-dark/85 font-light leading-relaxed anim-rise" style="--rise-delay: 320ms">
+          Trabajos realizados en conjunto con empresas constructoras y estudios, dentro
+          del rol de supervisión y dirección técnica. Patrimonio, aeropuertos y obras
+          comerciales.
+        </p>
+      </header>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10"><div class="dun-rule"></div></div>
   </section>
 
-  {
-    sections.map((s, i) => (
-      <section class="max-w-6xl mx-auto px-6 py-10 md:py-14 border-t border-dun-darker">
-        <div class="mb-8 max-w-2xl">
-          <p class="text-xs uppercase tracking-widest text-dun-muted mb-3">{s.kicker}</p>
-          <h2 class="text-2xl md:text-3xl font-light tracking-wide text-dun-cream">{s.title}</h2>
+  <!-- ===========================================
+       TABLE OF CONTENTS — editorial index
+  =========================================== -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-20" data-reveal>
+    <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-8 md:mb-12">Índice</p>
+    <ul class="space-y-1">
+      {sections.map((s, i) => (
+        <li>
+          <a href={`#${s.id}`} class="group relative grid grid-cols-12 items-baseline gap-4 py-4 md:py-5 border-t border-dun-cream/10 hover:border-dun-cream-dark/40 transition-colors">
+            <span class="col-span-2 md:col-span-1 dun-numeral text-2xl md:text-3xl text-dun-muted group-hover:text-dun-cream-dark transition">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="col-span-7 md:col-span-7 text-xl md:text-3xl font-thin tracking-wide text-dun-cream group-hover:text-white transition">
+              {s.title}
+            </span>
+            <span class="col-span-3 md:col-span-3 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark/70 md:text-right">
+              {s.kicker}
+            </span>
+            <span class="hidden md:inline col-span-1 text-right text-dun-cream-dark/60 group-hover:text-dun-cream transition">↓</span>
+          </a>
+        </li>
+      ))}
+      <li class="border-t border-dun-cream/10"></li>
+    </ul>
+  </section>
+
+  <!-- ===========================================
+       SECTIONS — galleries
+  =========================================== -->
+  {sections.map((s, i) => (
+    <section id={s.id} class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-28 scroll-mt-20" data-reveal>
+      <div class="grid grid-cols-12 gap-y-8 md:gap-x-10 mb-10 md:mb-14">
+        <!-- Sidebar: numeral + kicker + title -->
+        <div class="col-span-12 md:col-span-4">
+          <span class="dun-numeral text-7xl md:text-[10rem] block leading-[0.8]">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <p class="mt-4 text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/80">{s.kicker}</p>
+          <h2 class="mt-3 text-3xl md:text-5xl font-thin tracking-tight text-dun-cream leading-[1]">
+            {s.title}
+          </h2>
           {s.description && (
-            <p class="mt-3 text-dun-cream-dark font-light leading-relaxed">{s.description}</p>
+            <p class="mt-5 text-base text-dun-cream-dark/85 font-light leading-relaxed max-w-md">
+              {s.description}
+            </p>
           )}
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {s.images.map((img) => (
-            <Image
-              src={img}
-              alt={`Obra ${s.title}`}
-              class="w-full aspect-[4/3] object-cover"
-            />
-          ))}
+
+        <!-- Right gutter: image count + back-to-index -->
+        <div class="col-span-12 md:col-span-8 md:flex md:flex-col md:items-end md:justify-end">
+          <div class="text-[11px] uppercase tracking-[0.3em] text-dun-muted">
+            {String(s.images.length).padStart(2, '0')} imágenes
+          </div>
         </div>
-      </section>
-    ))
-  }
+      </div>
+
+      <!-- Gallery grid — varying tile sizes for editorial rhythm -->
+      <div class="grid grid-cols-6 gap-3 md:gap-5">
+        {s.images.map((img, j) => {
+          const big = j === 0;
+          const span = big ? 'col-span-6 md:col-span-4 aspect-[16/10]' : 'col-span-3 md:col-span-2 aspect-[4/3]';
+          return (
+            <figure class={`img-frame relative ${span}`}>
+              <Image
+                src={img}
+                alt={`Obra ${s.title} — ${j + 1}`}
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1100ms] hover:scale-[1.03]"
+              />
+              <figcaption class="absolute left-3 bottom-2 text-[10px] uppercase tracking-[0.25em] text-dun-cream/85 z-10">
+                {String(j + 1).padStart(2, '0')}
+              </figcaption>
+            </figure>
+          );
+        })}
+      </div>
+
+      <div class="mt-10 md:mt-14">
+        <div class="dun-rule"></div>
+      </div>
+    </section>
+  ))}
 </Layout>

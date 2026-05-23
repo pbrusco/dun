@@ -10,6 +10,11 @@ const {
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (target: string) => {
+  if (target === '/') return path === base || path === '/' || path === base + '/';
+  return path === `${base}${target}` || path.startsWith(`${base}${target}/`);
+};
 ---
 
 <!doctype html>
@@ -36,22 +41,44 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       rel="stylesheet"
     />
   </head>
-  <body class="bg-dun-dark text-dun-cream antialiased font-sans">
+  <body class="bg-dun-dark text-dun-cream antialiased font-sans relative">
+
+    <!-- Atmospheric grain overlay (fixed, pointer-events-none) -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
     <!-- Nav -->
-    <nav class="bg-dun-dark border-b border-dun-darker sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
-        <a href={`${base}/`} class="flex items-center hover:opacity-80 transition">
-          <div class="ring-1 ring-dun-cream/30 rounded-sm p-1">
+    <nav class="bg-dun-dark/90 backdrop-blur-sm border-b border-dun-cream/5 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-5 flex items-center justify-between">
+        <a href={`${base}/`} class="flex items-center hover:opacity-90 transition group">
+          <div class="ring-1 ring-dun-cream/20 group-hover:ring-dun-cream/40 transition rounded-sm p-1">
             <img src={`${base}/logo2.jpeg`} alt="DUN estudio de arquitectura" class="h-10 md:h-[5rem] w-auto" />
           </div>
         </a>
-        <div class="flex items-center gap-3 md:gap-6 text-sm font-light tracking-wider text-dun-cream-dark">
-          <a href={`${base}/`} class="hidden md:inline hover:text-dun-cream transition uppercase tracking-widest text-xs">Proyectos</a>
-          <a href={`${base}/obras-anteriores`} class="hidden md:inline hover:text-dun-cream transition uppercase tracking-widest text-xs">Obras anteriores</a>
-          <a href={`${base}/sobre-mi`} class="hover:text-dun-cream transition uppercase tracking-widest text-xs">Sobre mí</a>
+        <div class="flex items-center gap-4 md:gap-8 text-sm font-light tracking-wider text-dun-cream-dark">
+          <a
+            href={`${base}/`}
+            class:list={[
+              'hidden md:inline nav-link uppercase tracking-[0.2em] text-[11px]',
+              isActive('/') && 'is-active',
+            ]}
+          >Proyectos</a>
+          <a
+            href={`${base}/obras-anteriores`}
+            class:list={[
+              'hidden md:inline nav-link uppercase tracking-[0.2em] text-[11px]',
+              isActive('/obras-anteriores') && 'is-active',
+            ]}
+          >Trayectoria</a>
           <a
             href={`${base}/sobre-mi`}
-            class="border border-dun-cream text-dun-cream px-3 py-2 md:px-4 text-xs uppercase tracking-widest hover:bg-dun-cream hover:text-dun-dark transition"
+            class:list={[
+              'nav-link uppercase tracking-[0.2em] text-[11px]',
+              isActive('/sobre-mi') && 'is-active',
+            ]}
+          >Estudio</a>
+          <a
+            href={`${base}/sobre-mi#contacto`}
+            class="cta-link border border-dun-cream/60 text-dun-cream px-3 py-2 md:px-5 md:py-2.5 text-[11px] uppercase tracking-[0.2em] hover:bg-dun-cream hover:text-dun-dark transition"
           >
             Contacto
           </a>
@@ -59,36 +86,231 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </nav>
 
-    <main class="min-h-screen">
+    <main class="min-h-screen relative">
       <slot />
     </main>
 
-    <footer class="bg-dun-cream border-t border-dun-dark/10 mt-20">
-      <div class="max-w-7xl mx-auto px-6 py-12 text-center text-dun-dark">
-        <div class="ring-1 ring-dun-dark/20 rounded-sm p-1 inline-block mx-auto mb-6">
-          <img src={`${base}/logo3.jpeg`} alt="DUN estudio de arquitectura" class="h-20 md:h-[7.5rem] w-auto" />
+    <footer class="bg-dun-cream text-dun-dark mt-24 md:mt-32 relative overflow-hidden">
+      <!-- Decorative oversized wordmark -->
+      <div aria-hidden="true" class="absolute inset-x-0 -bottom-6 md:-bottom-16 text-center pointer-events-none select-none">
+        <span class="font-thin tracking-[0.25em] text-[18vw] md:text-[14vw] leading-none text-dun-dark/[0.06]">
+          DUN
+        </span>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 grid gap-12 md:grid-cols-12">
+        <div class="md:col-span-5">
+          <div class="ring-1 ring-dun-dark/15 rounded-sm p-1 inline-block mb-6">
+            <img src={`${base}/logo3.jpeg`} alt="DUN estudio de arquitectura" class="h-16 md:h-20 w-auto" />
+          </div>
+          <p class="text-[11px] uppercase tracking-[0.25em] text-dun-dark/80 font-light leading-relaxed max-w-xs">
+            Estudio de arquitectura<br/>
+            Reformas integrales · Restauración de patrimonio
+          </p>
         </div>
-        <p class="text-xs uppercase tracking-widest mb-1">Reformas integrales & Restauración de Patrimonio</p>
-        <p class="text-xs uppercase tracking-widest">Buenos Aires, Argentina</p>
-        <div class="mt-8 text-xs text-dun-muted">
-          &copy; {new Date().getFullYear()} DUN · estudio de arquitectura. Todos los derechos reservados.
+
+        <div class="md:col-span-3">
+          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-dark/50 mb-4 font-light">Navegación</p>
+          <ul class="space-y-2.5 text-sm font-light">
+            <li><a href={`${base}/`} class="footer-link">Proyectos</a></li>
+            <li><a href={`${base}/obras-anteriores`} class="footer-link">Trayectoria</a></li>
+            <li><a href={`${base}/sobre-mi`} class="footer-link">Estudio</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4">
+          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-dark/50 mb-4 font-light">Estudio</p>
+          <p class="text-sm font-light leading-relaxed">
+            Daniela Estevez Vredjian<br/>
+            <span class="text-dun-dark/70">Buenos Aires · Argentina</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="relative border-t border-dun-dark/15">
+        <div class="max-w-7xl mx-auto px-6 md:px-10 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-[10px] uppercase tracking-[0.25em] text-dun-dark/60 font-light">
+          <span>&copy; {new Date().getFullYear()} DUN · estudio de arquitectura</span>
+          <span class="italic normal-case tracking-normal text-xs">encontramos la forma de hacer <span class="text-dun-dark font-normal">hogar</span></span>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Scroll-reveal: any [data-reveal] gets a fade-up when it enters the viewport.
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-revealed');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+    </script>
   </body>
 </html>
 
 <style is:global>
+  :root {
+    --dun-dark: #033b38;
+    --dun-darker: #022b29;
+    --dun-cream: #eceadb;
+    --dun-cream-dark: #cca067;
+    --dun-muted: #a1836b;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-feature-settings: 'kern', 'liga', 'calt', 'ss01';
+  }
+
+  /* ====== Grain overlay — adds atmosphere to the dark teal base ====== */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.93  0 0 0 0 0.91  0 0 0 0 0.86  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: 200px 200px;
+  }
+
+  main, footer, nav {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ====== Typography ====== */
   h1, h2, h3, h4 {
     font-family: 'Lexend', system-ui, sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    font-feature-settings: 'kern', 'ss01';
   }
 
-  .prose {
-    color: #cca067;
+  h1 {
+    font-weight: 200;
   }
 
+  /* Selection */
+  ::selection {
+    background: var(--dun-cream-dark);
+    color: var(--dun-darker);
+  }
+
+  /* ====== Nav links — animated underline ====== */
+  .nav-link {
+    position: relative;
+    color: rgba(236, 234, 219, 0.7);
+    transition: color 250ms ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 1px;
+    background: var(--dun-cream);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 400ms cubic-bezier(0.7, 0, 0.3, 1);
+  }
+  .nav-link:hover { color: var(--dun-cream); }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+  .nav-link.is-active {
+    color: var(--dun-cream);
+  }
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+    background: var(--dun-cream-dark);
+  }
+
+  .footer-link {
+    color: rgba(3, 59, 56, 0.75);
+    transition: color 200ms ease;
+    position: relative;
+  }
+  .footer-link:hover {
+    color: var(--dun-dark);
+  }
+  .footer-link::before {
+    content: '— ';
+    opacity: 0;
+    margin-right: 2px;
+    transition: opacity 200ms ease;
+  }
+  .footer-link:hover::before {
+    opacity: 1;
+  }
+
+  /* ====== Reveal animations (used with data-reveal attribute) ====== */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal],
+    .anim-rise {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+      transition: none !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ====== Page-load staggered fade (immediate, no observer) ====== */
+  @keyframes dun-fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim-rise {
+    opacity: 0;
+    animation: dun-fade-in-up 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
+  /* ====== Decorative big numeral ====== */
+  .dun-numeral {
+    font-family: 'Lexend', system-ui, sans-serif;
+    font-weight: 100;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    color: var(--dun-cream-dark);
+    opacity: 0.55;
+    font-feature-settings: 'tnum';
+  }
+
+  /* ====== Hairline rule (used between sections) ====== */
+  .dun-rule {
+    height: 1px;
+    background: linear-gradient(to right,
+      transparent 0%,
+      rgba(204, 160, 103, 0.35) 20%,
+      rgba(204, 160, 103, 0.35) 80%,
+      transparent 100%);
+  }
+
+  /* ====== Prose overrides ====== */
+  .prose { color: #cca067; }
   .prose h2 {
     color: #eceadb;
     font-weight: 300;
@@ -96,12 +318,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     text-transform: uppercase;
     font-size: 0.85rem;
   }
+  .prose p, .prose li { color: #cca067; }
+  .prose a { color: #eceadb; text-decoration: underline; text-decoration-color: rgba(204,160,103,0.4); text-underline-offset: 4px; }
+  .prose strong { color: #eceadb; font-weight: 500; }
 
-  .prose p, .prose li {
-    color: #cca067;
+  /* ====== Image hover treatment shared across cards/galleries ====== */
+  .img-frame {
+    position: relative;
+    overflow: hidden;
   }
-
-  .prose a {
-    color: #eceadb;
+  .img-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(2,43,41,0.45) 0%, transparent 45%);
+    opacity: 0.6;
+    transition: opacity 500ms ease;
+    pointer-events: none;
   }
+  .img-frame:hover::after { opacity: 0.85; }
 </style>

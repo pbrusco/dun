@@ -26,109 +26,256 @@ const { title, description, location, year, category, plan, before, after, galle
 const hasBeforeAfter = before && after;
 const hasBody = (entry.body ?? '').trim().length > 0;
 
-let sectionIndex = 0;
-const nextSection = () => String(++sectionIndex).padStart(2, '0');
+// All projects, sorted by the same curated order used on the home page,
+// so "next" matches what the visitor would see browsing the index.
+const all = await getCollection('projects');
+const projectOrder = (slug: string) => {
+  const m: Record<string, number> = {
+    'cocina-devoto-2026': 1,
+    'depto-saavedra-2025': 2,
+    'cocina-palermo-2025': 3,
+    'cocina-villa-urquiza-2025': 4,
+    'ph-saavedra-2025': 5,
+    'depto-corrientes-2025': 6,
+    'local-palermo-2021': 7,
+  };
+  return m[slug] ?? 99;
+};
+const ordered = [...all].sort((a, b) => projectOrder(a.slug) - projectOrder(b.slug));
+const idx = ordered.findIndex((p) => p.slug === entry.slug);
+const next = ordered[(idx + 1) % ordered.length];
+
+// Section index builder
+type Section = { num: string; label: string; kind: 'plan' | 'change' | 'process' };
+const sections: Section[] = [];
+if (plan) sections.push({ num: '01', label: 'El plan', kind: 'plan' });
+if (hasBeforeAfter) sections.push({ num: String(sections.length + 1).padStart(2, '0'), label: 'El cambio', kind: 'change' });
+if (gallery && gallery.length > 0) sections.push({ num: String(sections.length + 1).padStart(2, '0'), label: 'El proceso', kind: 'process' });
 
 const categoryColors: Record<string, string> = {
-  Reforma: 'border-dun-muted text-dun-muted',
-  Patrimonio: 'border-dun-cream-dark text-dun-cream-dark',
-  Interiorismo: 'border-dun-cream text-dun-cream',
+  Reforma: 'border-dun-cream-dark/60 text-dun-cream-dark',
+  Patrimonio: 'border-dun-cream/60 text-dun-cream',
+  Interiorismo: 'border-dun-cream-dark/60 text-dun-cream-dark',
 };
 ---
 
 <Layout title={title} description={description}>
-  <article class="max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-16">
-    <!-- Header -->
-    <div class="mb-12">
-      <span class={`inline-block px-3 py-1 text-xs font-light tracking-widest mb-4 border ${categoryColors[category] ?? 'border-dun-muted text-dun-muted'}`}>
-        {category}
-      </span>
-      <h1 class="text-4xl md:text-5xl font-light tracking-wide text-dun-cream leading-tight">
-        {title}
-      </h1>
-      {(location || year) && (
-        <p class="mt-3 text-xs uppercase tracking-widest text-dun-muted font-light">
-          {[location, year].filter(Boolean).join(' · ')}
-        </p>
-      )}
-      {description && <p class="mt-4 text-lg text-dun-cream-dark font-light">{description}</p>}
-    </div>
+  <article>
 
-    <!-- El Plan -->
-    {
-      plan && (
-        <section class="mb-16">
-          <h2 class="text-xs uppercase tracking-widest text-dun-muted mb-6">{nextSection()} — El Plan</h2>
-          <Image
-            src={plan}
-            alt="Plano del proyecto"
-            class="w-full border border-dun-dark"
-          />
-        </section>
-      )
-    }
-
-    <!-- Antes & Después -->
-    {
-      hasBeforeAfter && (
-        <section class="mb-16">
-          <h2 class="text-xs uppercase tracking-widest text-dun-muted mb-6">
-            {nextSection()} — El Cambio
-          </h2>
-          <BeforeAfter before={before!} after={after!} />
-        </section>
-      )
-    }
-
-    <!-- El Proceso (galería "durante") -->
-    {
-      gallery && gallery.length > 0 && (
-        <section class="mb-16">
-          <h2 class="text-xs uppercase tracking-widest text-dun-muted mb-6">
-            {nextSection()} — El Proceso
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {gallery.map((img) => (
-              <Image
-                src={img}
-                alt="Foto del proceso de obra"
-                class="w-full object-cover aspect-[4/3]"
-              />
-            ))}
-          </div>
-        </section>
-      )
-    }
-
-    <!-- Descripción en Markdown (solo si hay contenido) -->
-    {
-      hasBody && (
-        <div class="prose prose-invert prose-lg max-w-none mb-16">
-          <Content />
-        </div>
-      )
-    }
-
-    <!-- Testimonio -->
-    {
-      testimonial && (
-        <blockquote class="border-l-2 border-dun-muted pl-6 my-12">
-          <p class="text-xl font-light italic text-dun-cream-dark">"{testimonial}"</p>
-          {testimonialAuthor && (
-            <footer class="mt-3 text-xs tracking-widest uppercase text-dun-muted">— {testimonialAuthor}</footer>
-          )}
-        </blockquote>
-      )
-    }
-
-    <!-- Back -->
-    <div class="pt-8 border-t border-dun-dark">
+    <!-- ===========================================
+         PROJECT HEADER — editorial, oversized
+    =========================================== -->
+    <section class="max-w-7xl mx-auto px-6 md:px-10 pt-10 md:pt-16 pb-14 md:pb-24">
+      <!-- Crumb -->
       <a
         href={`${base}/`}
-        class="text-xs font-light tracking-widest uppercase text-dun-muted hover:text-dun-cream transition flex items-center gap-1.5"
+        class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-dun-muted hover:text-dun-cream-dark transition mb-10 md:mb-16 anim-rise"
+        style="--rise-delay: 60ms"
       >
-        ← Volver a proyectos
+        <span class="block w-6 h-px bg-current"></span> Volver al índice
       </a>
-    </div>
+
+      <div class="grid grid-cols-12 gap-y-8">
+        <!-- Sidebar metadata -->
+        <aside class="col-span-12 md:col-span-3 md:pr-6 order-2 md:order-1 anim-rise" style="--rise-delay: 240ms">
+          <div class="space-y-7 text-[11px] uppercase tracking-[0.3em] font-light">
+            <div>
+              <p class="text-dun-muted/80 mb-1.5">Categoría</p>
+              <span class={`inline-block border px-2.5 py-1 ${categoryColors[category] ?? 'border-dun-muted text-dun-muted'}`}>
+                {category}
+              </span>
+            </div>
+            {location && (
+              <div>
+                <p class="text-dun-muted/80 mb-1.5">Ubicación</p>
+                <p class="text-dun-cream-dark normal-case tracking-wide">{location}</p>
+              </div>
+            )}
+            {year && (
+              <div>
+                <p class="text-dun-muted/80 mb-1.5">Año</p>
+                <p class="text-dun-cream-dark normal-case tracking-wide">{year}</p>
+              </div>
+            )}
+          </div>
+        </aside>
+
+        <!-- Title -->
+        <div class="col-span-12 md:col-span-9 order-1 md:order-2">
+          <h1 class="anim-rise text-[12vw] md:text-[7.5vw] xl:text-[7rem] font-thin leading-[0.95] tracking-[-0.02em] text-dun-cream" style="--rise-delay: 120ms">
+            {title}
+          </h1>
+          {description && (
+            <p class="mt-8 md:mt-10 text-lg md:text-xl text-dun-cream-dark/85 font-light leading-relaxed max-w-2xl anim-rise" style="--rise-delay: 320ms">
+              {description}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {sections.length > 1 && (
+        <nav class="mt-14 md:mt-20 flex flex-wrap items-center gap-x-8 gap-y-3 anim-rise" style="--rise-delay: 480ms">
+          <span class="text-[10px] uppercase tracking-[0.3em] text-dun-muted/80">Índice</span>
+          {sections.map((s) => (
+            <a
+              href={`#sec-${s.kind}`}
+              class="group flex items-baseline gap-2.5 text-[11px] uppercase tracking-[0.25em] text-dun-cream-dark/80 hover:text-dun-cream transition"
+            >
+              <span class="dun-numeral text-base opacity-100 text-dun-muted group-hover:text-dun-cream-dark transition">{s.num}</span>
+              <span>{s.label}</span>
+            </a>
+          ))}
+        </nav>
+      )}
+    </section>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10"><div class="dun-rule"></div></div>
+
+    <!-- ===========================================
+         SECTION 01 — EL PLAN
+    =========================================== -->
+    {plan && (
+      <section id="sec-plan" class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+        <div class="grid grid-cols-12 gap-6 md:gap-10">
+          <div class="col-span-12 md:col-span-3">
+            <span class="dun-numeral text-7xl md:text-[10rem] block leading-none">01</span>
+            <h2 class="mt-4 text-xs uppercase tracking-[0.3em] text-dun-cream-dark">El plan</h2>
+            <p class="mt-3 text-[11px] uppercase tracking-[0.25em] text-dun-muted/80">Documentación de obra</p>
+          </div>
+          <div class="col-span-12 md:col-span-9">
+            <div class="img-frame bg-dun-darker">
+              <Image
+                src={plan}
+                alt="Plano del proyecto"
+                class="w-full block"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ===========================================
+         SECTION — EL CAMBIO (antes / después)
+    =========================================== -->
+    {hasBeforeAfter && (
+      <section id="sec-change" class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+        <div class="grid grid-cols-12 gap-6 md:gap-10 mb-8 md:mb-12">
+          <div class="col-span-12 md:col-span-3">
+            <span class="dun-numeral text-7xl md:text-[10rem] block leading-none">{plan ? '02' : '01'}</span>
+            <h2 class="mt-4 text-xs uppercase tracking-[0.3em] text-dun-cream-dark">El cambio</h2>
+            <p class="mt-3 text-[11px] uppercase tracking-[0.25em] text-dun-muted/80">Arrastrá para comparar</p>
+          </div>
+          <div class="col-span-12 md:col-span-9">
+            <BeforeAfter before={before!} after={after!} />
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ===========================================
+         SECTION — EL PROCESO
+    =========================================== -->
+    {gallery && gallery.length > 0 && (
+      <section id="sec-process" class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+        <div class="grid grid-cols-12 gap-6 md:gap-10 mb-10 md:mb-14">
+          <div class="col-span-12 md:col-span-3">
+            <span class="dun-numeral text-7xl md:text-[10rem] block leading-none">
+              {sections.find((s) => s.kind === 'process')?.num ?? '03'}
+            </span>
+            <h2 class="mt-4 text-xs uppercase tracking-[0.3em] text-dun-cream-dark">El proceso</h2>
+            <p class="mt-3 text-[11px] uppercase tracking-[0.25em] text-dun-muted/80">{gallery.length} imágenes de obra</p>
+          </div>
+          <div class="col-span-12 md:col-span-9">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5">
+              {gallery.map((img, i) => (
+                <figure class={`img-frame relative ${i % 3 === 0 ? 'sm:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'}`}>
+                  <Image
+                    src={img}
+                    alt={`Proceso de obra — ${i + 1}`}
+                    class="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <figcaption class="absolute left-3 bottom-2 text-[10px] uppercase tracking-[0.25em] text-dun-cream/80 z-10">
+                    {String(i + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ===========================================
+         BODY / NOTAS
+    =========================================== -->
+    {hasBody && (
+      <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+        <div class="grid grid-cols-12 gap-6 md:gap-10">
+          <div class="col-span-12 md:col-span-3">
+            <span class="dun-numeral text-7xl md:text-[10rem] block leading-none">
+              {String(sections.length + 1).padStart(2, '0')}
+            </span>
+            <h2 class="mt-4 text-xs uppercase tracking-[0.3em] text-dun-cream-dark">Notas</h2>
+          </div>
+          <div class="col-span-12 md:col-span-8">
+            <div class="prose prose-invert prose-lg max-w-none">
+              <Content />
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Testimonio -->
+    {testimonial && (
+      <section class="max-w-5xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+        <blockquote class="relative">
+          <span aria-hidden="true" class="absolute -top-12 -left-2 md:-left-6 text-[10rem] md:text-[14rem] leading-none font-thin text-dun-cream-dark/15 select-none">"</span>
+          <p class="relative text-2xl md:text-3xl font-extralight italic-faux text-dun-cream leading-snug">{testimonial}</p>
+          {testimonialAuthor && (
+            <footer class="mt-6 text-[11px] uppercase tracking-[0.3em] text-dun-muted">— {testimonialAuthor}</footer>
+          )}
+        </blockquote>
+      </section>
+    )}
+
+    <!-- ===========================================
+         NEXT PROJECT
+    =========================================== -->
+    {next && next.slug !== entry.slug && (
+      <section class="border-t border-dun-cream/10 mt-16">
+        <a
+          href={`${base}/projects/${next.slug}`}
+          class="group block py-12 md:py-20 hover:bg-dun-darker/30 transition-colors duration-500"
+        >
+          <div class="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-12 gap-6 items-end">
+            <div class="col-span-12 md:col-span-3">
+              <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted">Siguiente proyecto</p>
+            </div>
+            <div class="col-span-9 md:col-span-6">
+              <h3 class="text-3xl md:text-5xl font-thin tracking-tight text-dun-cream group-hover:text-white transition leading-[0.95]">
+                {next.data.title}
+              </h3>
+              {(next.data.location || next.data.year) && (
+                <p class="mt-3 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark/70">
+                  {[next.data.location, next.data.year].filter(Boolean).join(' · ')}
+                </p>
+              )}
+            </div>
+            <div class="col-span-3 md:col-span-3 md:text-right">
+              <span class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark group-hover:text-dun-cream transition">
+                <span class="block w-8 h-px bg-current group-hover:w-16 transition-all duration-500"></span>
+                Ver
+              </span>
+            </div>
+          </div>
+        </a>
+      </section>
+    )}
   </article>
 </Layout>
+
+<style>
+  .italic-faux { font-style: italic; }
+</style>

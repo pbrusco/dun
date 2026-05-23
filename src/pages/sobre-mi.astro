@@ -9,84 +9,237 @@ import uba from '../assets/images/uba.jpeg';
   title="Sobre mí"
   description="Conocé a DUN Arquitectura — especialistas en reformas de departamentos y restauración de patrimonio histórico en Buenos Aires."
 >
-  <section class="max-w-5xl mx-auto px-6 py-10 md:py-20">
 
-    <!-- Hero: foto + nombre -->
-    <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-start mb-10 md:mb-16">
-      <div class="w-32 md:w-56 flex-shrink-0 mx-auto md:mx-0 order-first md:order-last">
-        <Image
-          src={dani}
-          alt="Daniela Estevez Vredjian"
-          class="w-full aspect-square object-cover object-center rounded-full"
-        />
-      </div>
-      <div class="flex-1">
-        <h1 class="text-3xl md:text-5xl font-light tracking-wide text-dun-cream mb-2">Daniela Estevez Vredjian</h1>
-        <p class="text-dun-cream-dark text-xs md:text-sm uppercase tracking-widest mb-6 md:mb-8 font-light">Arquitecta · Buenos Aires, Argentina</p>
-        <p class="text-dun-cream-dark leading-relaxed font-light text-base md:text-lg">
-          Me especializo en la remodelación y ejecución de obras de vivienda. Coordino cada etapa
-          del proceso — desde el proyecto inicial hasta el final de obra y entrega — para que el
-          resultado sea exactamente lo que imaginamos juntos.
+  <!-- ===========================================
+       HERO — name + role + portrait
+  =========================================== -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-8 md:pt-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/60 font-light anim-rise">
+      <span>Estudio · Daniela Estevez Vredjian</span>
+      <span class="hidden md:inline">Arquitecta</span>
+      <span>Buenos Aires · AR</span>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-12 md:pt-20 pb-12 md:pb-20 grid grid-cols-12 gap-y-10 md:gap-x-10">
+      <!-- Title block -->
+      <div class="col-span-12 md:col-span-8 order-2 md:order-1">
+        <p class="anim-rise text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-4" style="--rise-delay: 60ms">Estudio</p>
+        <h1 class="anim-rise" style="--rise-delay: 140ms">
+          <span class="block text-[13vw] md:text-[8vw] xl:text-[7.5rem] font-thin leading-[0.9] tracking-[-0.02em] text-dun-cream">
+            Daniela
+          </span>
+          <span class="block text-[13vw] md:text-[8vw] xl:text-[7.5rem] font-light leading-[0.9] tracking-[-0.02em] text-dun-cream-dark pl-[14%] md:pl-[22%]">
+            Estevez Vredjian.
+          </span>
+        </h1>
+
+        <p class="mt-8 md:mt-10 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark/80 font-light anim-rise" style="--rise-delay: 280ms">
+          Arquitecta · MP UBA · Posgrado en Patrimonio
         </p>
       </div>
+
+      <!-- Portrait -->
+      <div class="col-span-12 md:col-span-4 order-1 md:order-2 anim-rise" style="--rise-delay: 340ms">
+        <figure class="relative max-w-xs mx-auto md:max-w-none md:ml-auto">
+          <div class="absolute -inset-2 border border-dun-cream-dark/30"></div>
+          <Image
+            src={dani}
+            alt="Daniela Estevez Vredjian"
+            class="relative w-full aspect-[4/5] object-cover object-center"
+          />
+          <figcaption class="absolute -bottom-3 left-2 text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark bg-dun-dark px-2">
+            Fig. 01
+          </figcaption>
+        </figure>
+      </div>
     </div>
 
-    <div class="prose prose-invert prose-lg max-w-none">
-      <p>
-        Trabajo de forma independiente con foco en dos líneas: dar nueva vida a los espacios
-        habitables y preservar el patrimonio arquitectónico que nos identifica como ciudad.
-      </p>
+    <div class="max-w-7xl mx-auto px-6 md:px-10"><div class="dun-rule"></div></div>
+  </section>
 
-      <h2>Especialidades y servicios</h2>
-      <ul>
-        <li>Reforma integral de viviendas — cocinas, baños, departamentos y PH</li>
-        <li>Asesoría técnica</li>
-        <li>Restauración y puesta en valor de edificios patrimoniales</li>
-        <li>Certificado de conservación de fachadas — Informe de Evaluación del Edificio</li>
-        <li>Proyecto y documentación de obra</li>
-        <li>Inspección técnica y elaboración de informes</li>
-        <li>Coordinación y planificación de obra</li>
-      </ul>
+  <!-- ===========================================
+       PULL QUOTE / MANIFESTO
+  =========================================== -->
+  <section class="max-w-5xl mx-auto px-6 md:px-10 py-16 md:py-28" data-reveal>
+    <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-6">Manifiesto</p>
+    <p class="text-2xl md:text-4xl xl:text-5xl font-extralight leading-[1.2] tracking-tight text-dun-cream">
+      Me especializo en la <span class="text-dun-cream-dark">remodelación y ejecución</span>
+      de obras de vivienda. Coordino cada etapa del proceso —
+      desde el proyecto inicial hasta el final de obra y entrega —
+      para que el resultado sea <span class="italic-faux text-dun-cream">exactamente lo que imaginamos juntos.</span>
+    </p>
+  </section>
 
-      <h2>Proyectos destacados a gran escala</h2>
-      <p class="text-sm text-dun-muted italic">En conjunto con constructoras y estudios.</p>
-      <ul>
-        <li><strong>Manzana de las Luces</strong> — Restauración de fachadas y cubiertas del Edificio Ex Procuraduría y Ex Casas Redituantes (Ministerio de Cultura de la Nación)</li>
-        <li><strong>Instituto Sanmartiniano</strong> — Restauración de carpinterías</li>
-        <li><strong>Aeroparque J. Newbery</strong> — Remodelación integral de baños preembarque y reparación de cubiertas</li>
-        <li><strong>Aeropuerto Ministro Pistarini · Ezeiza</strong> — Instalaciones y cubiertas</li>
-      </ul>
+  <div class="max-w-7xl mx-auto px-6 md:px-10"><div class="dun-rule"></div></div>
 
-    </div>
-
-    <!-- Formación fuera del prose para poder usar Image -->
-    <div class="mt-10 mb-10">
-      <h2 class="text-xs uppercase tracking-widest text-dun-muted mb-6">Formación</h2>
-      <div class="flex items-start gap-6">
-        <Image src={uba} alt="Universidad de Buenos Aires" class="w-16 h-16 object-contain opacity-80 flex-shrink-0" />
-        <div class="space-y-3 text-sm font-light text-dun-cream-dark">
-          <p><span class="text-dun-cream font-normal">Maestro Mayor de Obras</span> <span class="text-dun-muted">(2005)</span></p>
-          <p><span class="text-dun-cream font-normal">Universidad de Buenos Aires</span> — Arquitecta <span class="text-dun-muted">(2006–2017)</span></p>
-          <p><span class="text-dun-cream font-normal">Universidad de Buenos Aires</span> — Posgrado en Conservación Integral y Rehabilitación del Patrimonio Arquitectónico <span class="text-dun-muted">(2020–2021)</span></p>
+  <!-- ===========================================
+       LINES OF WORK
+  =========================================== -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+    <div class="grid grid-cols-12 gap-y-10 md:gap-x-10">
+      <div class="col-span-12 md:col-span-4">
+        <span class="dun-numeral text-7xl md:text-[10rem] block leading-[0.8]">01</span>
+        <h2 class="mt-4 text-xs uppercase tracking-[0.3em] text-dun-cream-dark">Líneas de trabajo</h2>
+      </div>
+      <div class="col-span-12 md:col-span-8 grid md:grid-cols-2 gap-x-10 gap-y-8">
+        <div>
+          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">A —</p>
+          <h3 class="text-2xl font-extralight text-dun-cream tracking-wide leading-snug">Reforma de viviendas</h3>
+          <p class="mt-3 text-dun-cream-dark/85 font-light leading-relaxed">
+            Cocinas, baños, departamentos y PH. Dar nueva vida a los espacios habitables
+            de la ciudad.
+          </p>
+        </div>
+        <div>
+          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">B —</p>
+          <h3 class="text-2xl font-extralight text-dun-cream tracking-wide leading-snug">Patrimonio histórico</h3>
+          <p class="mt-3 text-dun-cream-dark/85 font-light leading-relaxed">
+            Restauración y puesta en valor de edificios patrimoniales que nos identifican
+            como ciudad.
+          </p>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="prose prose-invert prose-lg max-w-none">
+  <div class="max-w-7xl mx-auto px-6 md:px-10"><div class="dun-rule"></div></div>
 
-      <h2>Áreas de trabajo</h2>
-      <p>
-        Ciudad de Buenos Aires y Gran Buenos Aires.
-      </p>
+  <!-- ===========================================
+       SERVICES
+  =========================================== -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+    <div class="grid grid-cols-12 gap-y-10 md:gap-x-10">
+      <div class="col-span-12 md:col-span-4">
+        <span class="dun-numeral text-7xl md:text-[10rem] block leading-[0.8]">02</span>
+        <h2 class="mt-4 text-xs uppercase tracking-[0.3em] text-dun-cream-dark">Servicios</h2>
+      </div>
+      <ul class="col-span-12 md:col-span-8 divide-y divide-dun-cream/10">
+        {[
+          'Reforma integral de viviendas — cocinas, baños, departamentos y PH',
+          'Asesoría técnica',
+          'Restauración y puesta en valor de edificios patrimoniales',
+          'Certificado de conservación de fachadas — Informe de Evaluación del Edificio',
+          'Proyecto y documentación de obra',
+          'Inspección técnica y elaboración de informes',
+          'Coordinación y planificación de obra',
+        ].map((service, i) => (
+          <li class="grid grid-cols-12 items-baseline gap-4 py-4 md:py-5">
+            <span class="col-span-2 md:col-span-1 text-[10px] uppercase tracking-[0.3em] text-dun-muted">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="col-span-10 md:col-span-11 text-lg md:text-xl font-light text-dun-cream leading-snug">
+              {service}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
+  </section>
 
-    <div class="mt-12">
-      <a
-        href="#"
-        class="inline-block border border-dun-cream text-dun-cream px-8 py-4 text-xs uppercase tracking-widest font-light hover:bg-dun-cream hover:text-dun-dark transition"
-      >
-        Contactame
-      </a>
+  <div class="max-w-7xl mx-auto px-6 md:px-10"><div class="dun-rule"></div></div>
+
+  <!-- ===========================================
+       FEATURED LARGE-SCALE PROJECTS
+  =========================================== -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+    <div class="grid grid-cols-12 gap-y-10 md:gap-x-10">
+      <div class="col-span-12 md:col-span-4">
+        <span class="dun-numeral text-7xl md:text-[10rem] block leading-[0.8]">03</span>
+        <h2 class="mt-4 text-xs uppercase tracking-[0.3em] text-dun-cream-dark">A gran escala</h2>
+        <p class="mt-3 text-[11px] uppercase tracking-[0.25em] text-dun-muted/80 max-w-xs">
+          En conjunto con constructoras y estudios
+        </p>
+      </div>
+      <ul class="col-span-12 md:col-span-8 space-y-7">
+        {[
+          { title: 'Manzana de las Luces', body: 'Restauración de fachadas y cubiertas del Edificio Ex Procuraduría y Ex Casas Redituantes (Ministerio de Cultura de la Nación).' },
+          { title: 'Instituto Sanmartiniano', body: 'Restauración de carpinterías.' },
+          { title: 'Aeroparque J. Newbery', body: 'Remodelación integral de baños preembarque y reparación de cubiertas.' },
+          { title: 'Aeropuerto Ministro Pistarini · Ezeiza', body: 'Instalaciones y cubiertas.' },
+        ].map((p) => (
+          <li>
+            <h3 class="text-xl md:text-2xl font-extralight tracking-wide text-dun-cream">{p.title}</h3>
+            <p class="mt-2 text-dun-cream-dark/85 font-light leading-relaxed max-w-2xl">{p.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-10"><div class="dun-rule"></div></div>
+
+  <!-- ===========================================
+       FORMATION + COVERAGE
+  =========================================== -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+    <div class="grid grid-cols-12 gap-y-12 md:gap-x-10">
+      <div class="col-span-12 md:col-span-6">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-6">Formación</p>
+        <div class="flex items-start gap-5 md:gap-7">
+          <Image
+            src={uba}
+            alt="Universidad de Buenos Aires"
+            class="w-14 h-14 md:w-16 md:h-16 object-contain opacity-80 flex-shrink-0"
+          />
+          <ul class="space-y-4 text-sm md:text-base font-light text-dun-cream-dark/85">
+            <li>
+              <span class="text-dun-cream font-normal">Maestro Mayor de Obras</span>
+              <span class="block text-[10px] uppercase tracking-[0.3em] text-dun-muted mt-1">2005</span>
+            </li>
+            <li>
+              <span class="text-dun-cream font-normal">Universidad de Buenos Aires</span>
+              <span class="block text-dun-cream-dark/90">Arquitecta</span>
+              <span class="block text-[10px] uppercase tracking-[0.3em] text-dun-muted mt-1">2006 — 2017</span>
+            </li>
+            <li>
+              <span class="text-dun-cream font-normal">Universidad de Buenos Aires</span>
+              <span class="block text-dun-cream-dark/90">Posgrado en Conservación Integral y Rehabilitación del Patrimonio Arquitectónico</span>
+              <span class="block text-[10px] uppercase tracking-[0.3em] text-dun-muted mt-1">2020 — 2021</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-6">Zona de trabajo</p>
+        <p class="text-2xl md:text-3xl font-extralight text-dun-cream leading-snug">
+          Ciudad de Buenos Aires &<br/>Gran Buenos Aires.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       CONTACT
+  =========================================== -->
+  <section id="contacto" class="border-t border-dun-cream/10 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-28" data-reveal>
+      <div class="grid grid-cols-12 gap-y-8 md:gap-x-10 items-end">
+        <div class="col-span-12 md:col-span-7">
+          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-6">Contacto</p>
+          <p class="text-3xl md:text-5xl xl:text-6xl font-extralight text-dun-cream leading-[1.05] tracking-tight">
+            ¿Pensando en una<br/>
+            <span class="text-dun-cream-dark italic-faux">obra</span>?
+            <br/>Conversemos.
+          </p>
+        </div>
+        <div class="col-span-12 md:col-span-5">
+          <a
+            href="#"
+            class="inline-flex items-center gap-3 border border-dun-cream/60 text-dun-cream px-6 py-4 md:px-8 md:py-5 text-[11px] uppercase tracking-[0.3em] hover:bg-dun-cream hover:text-dun-dark transition-colors duration-300"
+          >
+            Escribirme
+            <span class="block w-6 h-px bg-current transition-all"></span>
+          </a>
+          <p class="mt-4 text-[10px] uppercase tracking-[0.3em] text-dun-muted/70 font-light max-w-xs">
+            Mail y redes por confirmar
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  .italic-faux { font-style: italic; }
+</style>
