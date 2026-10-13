@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import bannerTrayectoria from '../assets/images/obras-anteriores/manzana-luces/01.jpg';
 
 const allProjects = await getCollection('projects');
 const projectOrder = (slug: string) => {
@@ -22,9 +24,6 @@ const projectOrder = (slug: string) => {
 const reforms = allProjects
   .filter((p) => p.data.category !== 'Patrimonio')
   .sort((a, b) => projectOrder(a.slug) - projectOrder(b.slug));
-
-const featured = reforms[0];
-const rest = reforms.slice(1);
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const currentYear = new Date().getFullYear();
@@ -58,17 +57,35 @@ const currentYear = new Date().getFullYear();
           </span>
         </h1>
 
-        <div class="mt-12 md:mt-20 grid md:grid-cols-12 gap-6 md:gap-8 items-end anim-rise" style="--rise-delay: 480ms">
-          <p class="md:col-span-7 md:col-start-1 text-base md:text-lg text-dun-cream-dark/90 leading-relaxed font-light tracking-wide max-w-2xl">
+        <div class="mt-12 md:mt-16 grid md:grid-cols-12 gap-6 md:gap-8 items-end anim-rise" style="--rise-delay: 480ms">
+          <p class="md:col-span-7 md:col-start-1 text-base md:text-lg text-dun-cream-dark/75 leading-[1.8] font-light tracking-wide max-w-2xl">
             Arquitecta especializada en la reforma de viviendas y la restauración de
             patrimonio histórico en Buenos Aires. Proyecto, coordino y dirijo cada obra de
             principio a fin.
           </p>
-          <p class="md:col-span-4 md:col-start-9 text-[11px] uppercase tracking-[0.3em] text-dun-muted leading-relaxed font-light md:text-right">
-            <span class="italic-faux normal-case tracking-wider text-sm text-dun-cream-dark">
-              encontramos la forma de hacer <span class="text-dun-cream font-normal">hogar</span>
+          <p class="md:col-span-5 md:col-start-8 text-[11px] uppercase tracking-[0.3em] text-dun-muted leading-relaxed font-light md:text-right">
+            <span class="font-editorial normal-case tracking-normal text-lg md:text-xl text-dun-cream-dark/90">
+              encontramos la forma de hacer <span class="text-dun-cream font-medium not-italic">hogar</span>
             </span>
           </p>
+        </div>
+
+        <!-- Immediate Primary CTAs -->
+        <div class="mt-8 md:mt-10 flex flex-wrap items-center gap-4 anim-rise" style="--rise-delay: 600ms">
+          <a
+            href="#proyectos"
+            class="inline-flex items-center gap-2.5 px-5 py-2.5 bg-dun-cream text-dun-dark text-[11px] uppercase tracking-[0.22em] font-normal hover:bg-dun-cream-dark transition-all duration-300 shadow-sm"
+          >
+            <span>Ver proyectos</span>
+            <span class="text-xs">↓</span>
+          </a>
+          <a
+            href={`${base}/sobre-mi#contacto`}
+            class="inline-flex items-center gap-2.5 px-5 py-2.5 border border-dun-cream/40 text-dun-cream hover:border-dun-cream hover:bg-dun-cream/10 text-[11px] uppercase tracking-[0.22em] font-light transition-all duration-300"
+          >
+            <span>Iniciar consulta</span>
+            <span class="text-xs">→</span>
+          </a>
         </div>
       </header>
     </div>
@@ -80,35 +97,56 @@ const currentYear = new Date().getFullYear();
   </section>
 
   <!-- ===========================================
-       FEATURED PROJECT — large hero card
+       PROJECT CATALOG & INTERACTIVE FILTERS
   =========================================== -->
   {
-    featured && (
-      <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
-        <div class="mb-8 md:mb-12">
-          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Obra reciente</p>
-          <h2 class="text-2xl md:text-3xl font-extralight tracking-wide text-dun-cream">En proceso · {currentYear}</h2>
-        </div>
-        <ProjectCard project={featured} variant="featured" index={1} />
-      </section>
-    )
-  }
+    reforms.length > 0 && (
+      <section id="proyectos" class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
+        <div class="mb-10 md:mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-dun-cream/10 pb-8">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Índice de obras · {currentYear}</p>
+            <h2 class="text-2xl md:text-4xl font-extralight tracking-wide text-dun-cream">
+              Reformas & Interiorismo
+            </h2>
+          </div>
 
-  <!-- ===========================================
-       PROJECT INDEX
-  =========================================== -->
-  {
-    rest.length > 0 && (
-      <section class="max-w-7xl mx-auto px-6 md:px-10 pb-16 md:pb-24" data-reveal>
-        <div class="mb-8 md:mb-12">
-          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Índice de proyectos</p>
-          <h2 class="text-2xl md:text-3xl font-extralight tracking-wide text-dun-cream">
-            Reformas & Interiorismo
-          </h2>
+          <!-- Filter pills bar -->
+          <nav aria-label="Filtro de proyectos" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <button
+              type="button"
+              data-filter-btn="todos"
+              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream bg-dun-cream text-dun-dark font-normal transition-all duration-300 cursor-pointer whitespace-nowrap"
+            >
+              Todos
+            </button>
+            <button
+              type="button"
+              data-filter-btn="reformas"
+              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream/25 text-dun-cream-dark/75 hover:border-dun-cream/60 hover:text-dun-cream font-light transition-all duration-300 cursor-pointer whitespace-nowrap"
+            >
+              Reformas integrales
+            </button>
+            <button
+              type="button"
+              data-filter-btn="cocinas-banos"
+              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream/25 text-dun-cream-dark/75 hover:border-dun-cream/60 hover:text-dun-cream font-light transition-all duration-300 cursor-pointer whitespace-nowrap"
+            >
+              Cocinas & Baños
+            </button>
+            <button
+              type="button"
+              data-filter-btn="mobiliario"
+              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream/25 text-dun-cream-dark/75 hover:border-dun-cream/60 hover:text-dun-cream font-light transition-all duration-300 cursor-pointer whitespace-nowrap"
+            >
+              Mobiliario & Comercial
+            </button>
+          </nav>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-          {rest.map((project, i) => (
-            <ProjectCard project={project} index={i + 2} />
+
+        <!-- Project cards grid -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+          {reforms.map((project, i) => (
+            <ProjectCard project={project} index={i + 1} />
           ))}
         </div>
       </section>
@@ -116,38 +154,49 @@ const currentYear = new Date().getFullYear();
   }
 
   <!-- ===========================================
-       OBRAS ANTERIORES CTA — editorial banner
+       OBRAS ANTERIORES CTA — elevated architectural banner
   =========================================== -->
-  <section class="max-w-7xl mx-auto px-6 md:px-10 pb-16 md:pb-24" data-reveal>
+  <section class="max-w-7xl mx-auto px-6 md:px-10 pb-20 md:pb-32" data-reveal>
     <a
       href={`${base}/obras-anteriores`}
-      class="group relative block py-12 md:py-20 border-t border-b border-dun-cream/15 hover:border-dun-cream-dark/40 transition-colors duration-700 overflow-hidden"
+      class="group relative block p-8 md:p-16 border border-dun-cream/20 hover:border-dun-cream/50 bg-dun-darker/40 transition-all duration-700 overflow-hidden"
     >
-      <!-- decorative background wordmark — typographic ornament, no numeric meaning -->
+      <!-- Background historic monument photo with duotone overlay -->
+      <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <Image
+          src={bannerTrayectoria}
+          alt="Restauración de patrimonio histórico - Manzana de las Luces"
+          class="w-full h-full object-cover grayscale opacity-15 group-hover:opacity-25 group-hover:scale-105 transition-all duration-1000 ease-out"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-dun-darker via-dun-darker/85 to-transparent mix-blend-multiply"></div>
+      </div>
+
+      <!-- decorative background wordmark -->
       <span
         aria-hidden="true"
-        class="absolute right-2 md:right-6 -top-4 md:top-1/2 md:-translate-y-1/2 font-thin tracking-[0.2em] text-[7rem] md:text-[12rem] leading-none text-dun-cream-dark pointer-events-none select-none opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-700"
+        class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 font-thin tracking-[0.2em] text-[8rem] md:text-[14rem] leading-none text-dun-cream pointer-events-none select-none opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-700"
       >
         DUN
       </span>
 
-      <div class="relative grid md:grid-cols-12 gap-6 items-center">
-        <div class="md:col-span-2">
-          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted">Trayectoria</p>
-        </div>
-        <div class="md:col-span-7">
-          <h2 class="text-4xl md:text-6xl font-thin tracking-tight text-dun-cream leading-[0.95]">
-            Obras anteriores
+      <div class="relative z-10 grid md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-8">
+          <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/70 mb-4">
+            <span class="w-6 h-px bg-dun-cream-dark/40"></span>
+            <span>Trayectoria & Gran Escala</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-6xl font-thin tracking-tight text-dun-cream leading-[1.05]">
+            Obras anteriores & Patrimonio
           </h2>
           <p class="mt-4 md:mt-6 text-base md:text-lg text-dun-cream-dark/85 font-light max-w-2xl leading-relaxed">
-            Restauración de patrimonio, aeropuertos y obras de gran escala realizadas junto
-            a constructoras y estudios.
+            Restauración de patrimonio histórico nacional, aeropuertos y obras de escala
+            monumental proyectadas y dirigidas junto a constructoras y estudios de referencia.
           </p>
         </div>
-        <div class="md:col-span-3 md:text-right">
-          <span class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark group-hover:text-dun-cream transition">
-            Ver galería
-            <span class="block w-8 h-px bg-current group-hover:w-14 transition-all duration-500"></span>
+        <div class="md:col-span-4 md:text-right">
+          <span class="inline-flex items-center gap-3 px-5 py-3 border border-dun-cream/40 group-hover:border-dun-cream group-hover:bg-dun-cream group-hover:text-dun-dark text-[11px] uppercase tracking-[0.25em] text-dun-cream transition-all duration-500 shadow-sm">
+            <span>Explorar archivo</span>
+            <span class="text-sm">→</span>
           </span>
         </div>
       </div>
@@ -164,9 +213,54 @@ const currentYear = new Date().getFullYear();
   }
 </Layout>
 
+<script>
+  // Filter pills interaction
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('[data-filter-btn]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-project-card]');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.filterBtn;
+      if (!target) return;
+
+      // Update button styling
+      filterBtns.forEach((b) => {
+        const isMatch = b === btn;
+        if (isMatch) {
+          b.classList.add('bg-dun-cream', 'text-dun-dark', 'border-dun-cream', 'font-normal');
+          b.classList.remove('bg-transparent', 'text-dun-cream-dark/75', 'border-dun-cream/25', 'font-light');
+        } else {
+          b.classList.remove('bg-dun-cream', 'text-dun-dark', 'border-dun-cream', 'font-normal');
+          b.classList.add('bg-transparent', 'text-dun-cream-dark/75', 'border-dun-cream/25', 'font-light');
+        }
+      });
+
+      // Filter cards
+      cards.forEach((card) => {
+        const group = card.dataset.group;
+        const visible = target === 'todos' || group === target;
+        if (visible) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 <style>
   /* Lexend has no native italic — use a refined synthesized slant only where we want a typographic accent */
   .italic-faux {
     font-style: italic;
+  }
+
+  /* Hide scrollbar for category pills on horizontal scroll */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 </style>
