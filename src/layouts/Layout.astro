@@ -103,11 +103,11 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
           <a
             href={isHome ? '#proyectos' : `${base}/#proyectos`}
             class:list={['nav-link inline-flex items-center min-h-11 uppercase tracking-[0.2em] text-[11px]', isHome && 'is-active']}
-          >Obras</a>
+          >Para particulares</a>
           <a
             href={`${base}/obras-anteriores`}
             class:list={['nav-link inline-flex items-center min-h-11 uppercase tracking-[0.2em] text-[11px]', isActive('/obras-anteriores') && 'is-active']}
-          >Obras anteriores</a>
+          >Gran escala y patrimonio</a>
           <a
             href={`${base}/sobre-mi`}
             class:list={['nav-link inline-flex items-center min-h-11 uppercase tracking-[0.2em] text-[11px]', isActive('/sobre-mi') && 'is-active']}
@@ -148,8 +148,8 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
 
       <div id="nav-panel" hidden class="md:hidden border-t border-dun-cream/10 bg-dun-dark">
         <ul class="px-4 py-2">
-          <li><a href={isHome ? '#proyectos' : `${base}/#proyectos`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream">Obras</a></li>
-          <li><a href={`${base}/obras-anteriores`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream border-t border-dun-cream/10">Obras anteriores</a></li>
+          <li><a href={isHome ? '#proyectos' : `${base}/#proyectos`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream">Para particulares</a></li>
+          <li><a href={`${base}/obras-anteriores`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream border-t border-dun-cream/10">Gran escala y patrimonio</a></li>
           <li><a href={`${base}/sobre-mi`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream border-t border-dun-cream/10">Sobre mí</a></li>
         </ul>
       </div>
@@ -179,8 +179,8 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
         <div class="md:col-span-3">
           <p class="text-[11px] uppercase tracking-[0.3em] text-dun-muted mb-4 font-light">Navegación</p>
           <ul class="space-y-0 text-sm font-light">
-            <li><a href={`${base}/#proyectos`} class="footer-link">Obras</a></li>
-            <li><a href={`${base}/obras-anteriores`} class="footer-link">Obras anteriores</a></li>
+            <li><a href={`${base}/#proyectos`} class="footer-link">Para particulares</a></li>
+            <li><a href={`${base}/obras-anteriores`} class="footer-link">Gran escala y patrimonio</a></li>
             <li><a href={`${base}/sobre-mi`} class="footer-link">Sobre mí</a></li>
             <li><a href={`${base}/contacto`} class="footer-link">Contacto</a></li>
           </ul>
