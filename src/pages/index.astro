@@ -28,7 +28,6 @@ const projectOrder = (slug: string) => {
 };
 const projects = allProjects.sort((a, b) => projectOrder(a.slug) - projectOrder(b.slug));
 
-const heroProjects = projects.slice(0, 5);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const filters = [
@@ -45,48 +44,57 @@ const filters = [
   title="DUN · Estudio de arquitectura"
   description="DUN · Estudio de arquitectura en Buenos Aires. Obras y proyectos de Daniela Estevez Vredjian."
 >
-  <!-- Portada: obras recientes a pantalla completa -->
-  <section id="portada" class="relative w-full overflow-hidden bg-dun-darker h-[calc(100svh-4rem)] min-h-[480px]" aria-label="Obras destacadas">
-    {heroProjects.map((p, i) => (
-      <a
-        href={`${base}/projects/${p.slug}`}
-        data-hero-slide
-        aria-hidden={i === 0 ? 'false' : 'true'}
-        tabindex={i === 0 ? 0 : -1}
-        class:list={['absolute inset-0 block transition-opacity duration-[1400ms] ease-in-out', i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none']}
-      >
-        <Image
-          src={p.data.cover}
-          alt={p.data.title}
-          widths={[640, 1024, 1600]}
-          sizes="100vw"
-          loading={i === 0 ? 'eager' : 'lazy'}
-          class="hero-img absolute inset-0 w-full h-full object-cover"
-        />
-      </a>
-    ))}
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-dun-darker via-dun-darker/40 to-dun-darker/10"></div>
+  <!-- Portada: plano que se dibuja solo -->
+  <section id="portada" class="relative w-full overflow-hidden bg-dun-darker h-[calc(100svh-4rem)] min-h-[480px]" aria-label="Portada">
+    <svg
+      class="plan absolute inset-x-0 top-0 w-full h-[calc(100%-11rem)] md:h-[calc(100%-9rem)] px-4 md:px-10"
+      viewBox="0 0 1000 600"
+      preserveAspectRatio="xMidYMid meet"
+      fill="none"
+      stroke-linecap="square"
+      aria-hidden="true"
+    >
+      <!-- ejes -->
+      <g class="ax" stroke="#cca067" stroke-width="1" stroke-dasharray="14 6 2 6" opacity="0.5">
+        <path pathLength="1" d="M100 30V545" style="--d:0" />
+        <path pathLength="1" d="M450 30V545" style="--d:1" />
+        <path pathLength="1" d="M900 30V545" style="--d:2" />
+      </g>
+      <!-- muros -->
+      <g stroke="#eceadb" stroke-width="4" stroke-linejoin="miter">
+        <path class="ln" pathLength="1" d="M100 80H900V520H100Z" style="--d:3" />
+        <path class="ln" pathLength="1" d="M450 80V320M100 320H300M380 320H450" style="--d:6" />
+        <path class="ln" pathLength="1" d="M450 200H560M640 200H900" style="--d:7" />
+        <path class="ln" pathLength="1" d="M650 200V380M650 440V520" style="--d:8" />
+      </g>
+      <!-- puertas -->
+      <g stroke="#eceadb" stroke-width="1.5" opacity="0.85">
+        <path class="ln" pathLength="1" d="M380 320V240A80 80 0 0 0 300 320" style="--d:10" />
+        <path class="ln" pathLength="1" d="M650 440H730A80 80 0 0 0 650 360" style="--d:11" />
+        <path class="ln" pathLength="1" d="M560 200V130A80 80 0 0 1 640 200" style="--d:12" />
+      </g>
+      <!-- aberturas -->
+      <g stroke="#eceadb" stroke-width="1.5">
+        <path class="ln" pathLength="1" d="M200 74H360V86H200Z" style="--d:12" />
+        <path class="ln" pathLength="1" d="M520 514H760V526H520Z" style="--d:13" />
+        <path class="ln" pathLength="1" d="M894 250H906V370H894Z" style="--d:14" />
+      </g>
+      <!-- cotas -->
+      <g stroke="#cca067" stroke-width="1.5">
+        <path class="ln" pathLength="1" d="M100 565H900M100 553V577M450 553V577M900 553V577" style="--d:15" />
+      </g>
+    </svg>
 
-    <div class="pointer-events-none absolute inset-x-0 bottom-0 max-w-7xl mx-auto px-6 md:px-10 pb-20 md:pb-24">
-      <h1 class="anim-rise">
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-dun-darker to-transparent"></div>
+
+    <div class="absolute inset-x-0 bottom-0 max-w-7xl mx-auto px-6 md:px-10 pb-20 md:pb-24">
+      <h1 class="word">
         <span class="block text-6xl md:text-8xl font-thin tracking-[0.06em] text-dun-cream">DUN</span>
         <span class="block mt-2 text-[11px] md:text-sm font-extralight tracking-[0.25em] uppercase text-dun-cream">Estudio de arquitectura · Buenos Aires</span>
       </h1>
-      <p class="mt-6 text-[11px] uppercase tracking-[0.25em] text-dun-cream-dark" aria-live="off">
-        {heroProjects.map((p, i) => (
-          <span data-hero-caption class:list={[i === 0 ? '' : 'hidden']}>{[p.data.title, p.data.year].filter(Boolean).join(' · ')}</span>
-        ))}
-      </p>
     </div>
 
-    <div class="absolute inset-x-0 bottom-0 max-w-7xl mx-auto px-6 md:px-10 pb-5 flex items-center justify-between">
-      <div class="flex items-center">
-        {heroProjects.map((p, i) => (
-          <button type="button" data-hero-dot={i} aria-label={`Ver ${p.data.title}`} aria-current={i === 0 ? 'true' : 'false'} class="group w-11 h-11 flex items-center justify-center cursor-pointer">
-            <span class="block h-px w-6 bg-dun-cream/40 group-aria-[current=true]:bg-dun-cream transition-colors"></span>
-          </button>
-        ))}
-      </div>
+    <div class="absolute inset-x-0 bottom-0 max-w-7xl mx-auto px-6 md:px-10 pb-5 flex justify-end">
       <a href="#proyectos" class="inline-flex items-center gap-2 min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream hover:text-white transition">
         Ver obras <span aria-hidden="true">↓</span>
       </a>
@@ -184,34 +192,6 @@ const filters = [
 
 <script>
 
-  const slides = document.querySelectorAll<HTMLElement>('[data-hero-slide]');
-  const dots = document.querySelectorAll<HTMLButtonElement>('[data-hero-dot]');
-  const caps = document.querySelectorAll<HTMLElement>('[data-hero-caption]');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let cur = 0;
-  let timer: number | undefined;
-  const show = (n: number) => {
-    cur = (n + slides.length) % slides.length;
-    slides.forEach((el, i) => {
-      const on = i === cur;
-      el.classList.toggle('opacity-100', on);
-      el.classList.toggle('opacity-0', !on);
-      el.classList.toggle('pointer-events-none', !on);
-      el.setAttribute('aria-hidden', String(!on));
-      el.tabIndex = on ? 0 : -1;
-    });
-    dots.forEach((d, i) => d.setAttribute('aria-current', String(i === cur)));
-    caps.forEach((c, i) => c.classList.toggle('hidden', i !== cur));
-  };
-  const start = () => {
-    if (reduce || slides.length < 2) return;
-    stop();
-    timer = window.setInterval(() => show(cur + 1), 5500);
-  };
-  const stop = () => { if (timer) window.clearInterval(timer); };
-  dots.forEach((d, i) => d.addEventListener('click', () => { show(i); start(); }));
-  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
-  start();
   const filterBtns = document.querySelectorAll<HTMLButtonElement>('[data-filter-btn]');
   const wraps = document.querySelectorAll<HTMLElement>('[data-project-wrap]');
   const on = ['bg-dun-cream', 'text-dun-dark', 'border-dun-cream', 'font-normal'];
@@ -242,15 +222,33 @@ const filters = [
   }
 
   /* Hide scrollbar for category pills on horizontal scroll */
-  @keyframes hero-zoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.06); }
+  .plan .ln,
+  .plan .ax path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: plan-draw 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: calc(var(--d) * 0.22s + 0.2s);
   }
-  .hero-img {
-    animation: hero-zoom 12s ease-out both;
+  .plan .ax path {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0;
+    animation: plan-fade 1.6s ease forwards;
+  }
+  .word {
+    opacity: 0;
+    animation: plan-fade 1.8s ease forwards;
+    animation-delay: 3.6s;
+  }
+  @keyframes plan-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes plan-fade {
+    to { opacity: 1; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-img { animation: none; }
+    .plan .ln, .plan .ax path { animation: none; stroke-dashoffset: 0; opacity: 1; }
+    .word { animation: none; opacity: 1; }
   }
 
   .no-scrollbar::-webkit-scrollbar {
