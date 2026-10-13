@@ -38,38 +38,48 @@ Si están disponibles, podemos sumarlos a cada ficha:
 ### Por proyecto
 
 #### Cocina Devoto · 2026
-- ✅ Tenemos breve descripción
+- ✅ Breve descripción
+- ✅ Renders de proyecto sumados
+- ✅ Fotos finales y antes/después integrados
 - [ ] Datos técnicos (m², duración, materiales)
-- [ ] ¿Se confirma que sólo se ejecutó la obra y no el proyecto? Convendría ponerlo en el sitio o no.
 
 #### Cocina Depto Saavedra · 2025
+- ✅ Fotos finales y antes/después integrados
 - [ ] Descripción corta + larga
 - [ ] Datos técnicos
 
 #### Cocina Palermo · Costa Rica · 2025
+- ✅ Fotos antes/después y fotos de diseño de mobiliario integradas
 - [ ] Descripción corta + larga
 - [ ] Datos técnicos
 
 #### Cocina Villa Urquiza · 2025
+- ✅ Fotos finales (11 fotos), antes/después y proceso sumados
 - [ ] Descripción corta + larga
 - [ ] Datos técnicos
-- [ ] La carpeta sólo tiene 2 fotos de proceso — ¿hay más?
 
 #### PH Saavedra · 2025
-- [ ] Descripción corta + larga
+- ✅ 7 fotos finales de alta resolución integradas (portada y galería)
 - [ ] Datos técnicos
-- [ ] Hay archivos `PROCESO-GRAFICO-01..04`: ¿son planos? Por ahora se usa el primero como plano y los demás en galería. ¿Está bien?
 
 #### Departamento Av. Corrientes · Centro · 2025
-- [ ] Descripción corta + larga
+- ✅ Foto final de obra sumada
 - [ ] Datos técnicos
 - [ ] ¿Plano disponible?
 
 #### Local Palermo · 2021
-- [ ] Descripción corta + larga
-- [ ] La carpeta `antes/` estaba vacía. Se usa una foto encontrada en `proceso/` (`localpalermo-antes-01.jpg`) como "antes". ¿Está bien o hay una mejor?
-- [ ] El plano viene del PDF `_ARMENIA1810-REV10.pdf` (convertido a imagen). Si hay una versión limpia / JPG / mejor exportada, mejor.
-- [ ] ¿Categoría correcta? Se asignó **Interiorismo** por ser un local comercial.
+- ✅ Antes y después formal integrado
+- ✅ Fotos finales de local terminado integradas
+- [ ] Datos técnicos
+
+#### Villa Ortúzar · 2026 (NUEVO)
+- ✅ Proyecto incorporado con antes, después y proceso completo
+
+#### Selección de Baños · 2026 (NUEVO)
+- ✅ Ficha de proyecto incorporada agrupando reformas en Caballito, Palermo, Saavedra, Olivos y Barracas
+
+#### Mobiliario a Medida · Placares · 2026 (NUEVO)
+- ✅ Ficha de proyecto incorporada con detalles de frentes e interiores de placard
 
 ---
 

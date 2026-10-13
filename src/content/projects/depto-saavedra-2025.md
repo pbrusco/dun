@@ -3,11 +3,18 @@ title: "Cocina · Depto Saavedra"
 location: "Saavedra, CABA"
 year: 2025
 category: "Reforma"
-cover: "../../assets/images/depto-saavedra-2025/cover.jpg"
+cover: "../../assets/images/depto-saavedra-2025/final-01.jpg"
 before: "../../assets/images/depto-saavedra-2025/antes.jpg"
 after: "../../assets/images/depto-saavedra-2025/despues.jpg"
 gallery:
+  - "../../assets/images/depto-saavedra-2025/final-01.jpg"
+  - "../../assets/images/depto-saavedra-2025/final-02.jpg"
+  - "../../assets/images/depto-saavedra-2025/final-03.jpg"
   - "../../assets/images/depto-saavedra-2025/proceso-01.jpg"
   - "../../assets/images/depto-saavedra-2025/proceso-02.jpg"
   - "../../assets/images/depto-saavedra-2025/proceso-03.jpg"
 ---
+
+### Sobre este proyecto
+
+Renovación de cocina en departamento de Saavedra. Se rediseñó la distribución lineal para incorporar mayor mesada de trabajo, iluminación bajo alacena y revestimientos cerámicos subway que potencian la claridad y amplitud del espacio.

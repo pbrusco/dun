@@ -7,12 +7,15 @@ const allProjects = await getCollection('projects');
 const projectOrder = (slug: string) => {
   const m: Record<string, number> = {
     'cocina-devoto-2026': 1,
-    'depto-saavedra-2025': 2,
-    'cocina-palermo-2025': 3,
-    'cocina-villa-urquiza-2025': 4,
-    'ph-saavedra-2025': 5,
-    'depto-corrientes-2025': 6,
-    'local-palermo-2021': 7,
+    'villa-ortuzar-2026': 2,
+    'depto-saavedra-2025': 3,
+    'cocina-palermo-2025': 4,
+    'cocina-villa-urquiza-2025': 5,
+    'ph-saavedra-2025': 6,
+    'depto-corrientes-2025': 7,
+    'banos': 8,
+    'mobiliario-placares': 9,
+    'local-palermo-2021': 10,
   };
   return m[slug] ?? 99;
 };
