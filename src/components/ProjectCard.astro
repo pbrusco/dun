@@ -23,7 +23,7 @@ const getFilterGroup = (slug: string) => {
 const filterGroup = getFilterGroup(project.slug);
 
 const specialBadges: Record<string, string> = {
-  'banos': 'Compilado temático',
+  'banos': 'Selección de baños',
   'mobiliario-placares': 'Mobiliario a medida',
   'local-palermo-2021': 'Comercial',
 };
@@ -54,7 +54,7 @@ const badgeLabel = specialBadges[project.slug] ?? category;
       class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-[700ms] ease-out"
     />
 
-    <!-- Year as oversized typographic anchor in image corner -->
+    <!-- Year as typographic watermark in corner -->
     {year && (
       <span
         aria-hidden="true"
@@ -87,19 +87,21 @@ const badgeLabel = specialBadges[project.slug] ?? category;
       <h3 class={`font-light tracking-wide text-dun-cream group-hover:text-white transition ${variant === 'featured' ? 'text-2xl md:text-4xl' : 'text-lg md:text-xl'}`}>
         {title}
       </h3>
-      {(location || description) && (
-        <p class="mt-2 text-sm font-light text-dun-cream-dark/80 line-clamp-2 leading-relaxed">
-          {description ?? location}
+      {description && (
+        <p class="mt-2 text-xs md:text-sm font-light text-dun-cream-dark/80 line-clamp-2 leading-relaxed">
+          {description}
         </p>
       )}
     </div>
     <div class="text-right shrink-0">
-      <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted leading-relaxed">
-        {location && <span class="block">{location}</span>}
-      </p>
-      <span class="mt-2 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-dun-cream-dark/70 group-hover:text-dun-cream transition">
-        Ver
-        <span class="block w-5 h-px bg-current group-hover:w-9 transition-all duration-500"></span>
+      {location && (
+        <p class="text-[10px] uppercase tracking-[0.25em] text-dun-muted font-light leading-relaxed">
+          {location}
+        </p>
+      )}
+      <span class="mt-2.5 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-dun-cream-dark/80 group-hover:text-dun-cream transition-all">
+        <span>Ver proyecto</span>
+        <span class="text-xs">→</span>
       </span>
     </div>
   </div>

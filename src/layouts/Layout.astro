@@ -11,10 +11,14 @@ const {
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = path === '/' || path === base || path === `${base}/`;
 const isActive = (target: string) => {
-  if (target === '/') return path === base || path === '/' || path === base + '/';
+  if (target === '/') return isHome;
   return path === `${base}${target}` || path.startsWith(`${base}${target}/`);
 };
+
+const fullTitle = title.includes('DUN') ? title : `${title} | DUN · estudio de arquitectura`;
+const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`;
 ---
 
 <!doctype html>
@@ -25,13 +29,58 @@ const isActive = (target: string) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | DUN · estudio de arquitectura</title>
+    <title>{fullTitle}</title>
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={`${title} | DUN · estudio de arquitectura`} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://dunarquitectura.com.ar" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content="https://dunarquitectura.com.ar/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://dunarquitectura.com.ar/og-image.jpg" />
+
+    <!-- Schema.org JSON-LD LocalBusiness / Architect -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Architect",
+        "name": "DUN · Estudio de Arquitectura",
+        "legalName": "Daniela Estevez Vredjian",
+        "founder": {
+          "@type": "Person",
+          "name": "Daniela Estevez Vredjian",
+          "jobTitle": "Arquitecta"
+        },
+        "url": "https://dunarquitectura.com.ar",
+        "logo": "https://dunarquitectura.com.ar/logo-header.webp",
+        "image": "https://dunarquitectura.com.ar/og-image.jpg",
+        "telephone": "+5491162374256",
+        "email": "hola.dun.arquitectura@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ciudad Autónoma de Buenos Aires",
+          "addressRegion": "CABA",
+          "addressCountry": "AR"
+        },
+        "areaServed": [
+          "Ciudad Autónoma de Buenos Aires",
+          "Gran Buenos Aires",
+          "Zona Norte"
+        ],
+        "sameAs": [
+          "https://www.instagram.com/dun.arquitectura/"
+        ]
+      }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,10 +105,10 @@ const isActive = (target: string) => {
         </a>
         <div class="flex items-center gap-3 md:gap-8 text-sm font-light tracking-wider text-dun-cream-dark">
           <a
-            href={`${base}/`}
+            href={isHome ? '#proyectos' : `${base}/#proyectos`}
             class:list={[
               'hidden md:inline nav-link uppercase tracking-[0.2em] text-[11px]',
-              isActive('/') && 'is-active',
+              isHome && 'is-active',
             ]}
           >Proyectos</a>
           <a
@@ -68,17 +117,20 @@ const isActive = (target: string) => {
               'nav-link uppercase tracking-[0.18em] md:tracking-[0.2em] text-[10px] md:text-[11px]',
               isActive('/obras-anteriores') && 'is-active',
             ]}
-          >Trayectoria</a>
+          >Patrimonio</a>
           <a
             href={`${base}/sobre-mi`}
             class:list={[
               'nav-link uppercase tracking-[0.18em] md:tracking-[0.2em] text-[10px] md:text-[11px]',
               isActive('/sobre-mi') && 'is-active',
             ]}
-          >Estudio</a>
+          >Sobre mí</a>
           <a
-            href={`${base}/sobre-mi#contacto`}
-            class="cta-link border border-dun-cream text-dun-cream px-3 py-1.5 md:px-5 md:py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] hover:bg-dun-cream hover:text-dun-dark transition-all duration-300 font-normal whitespace-nowrap shadow-sm hover:shadow"
+            href={`${base}/contacto`}
+            class:list={[
+              'cta-link border border-dun-cream text-dun-cream px-3 py-1.5 md:px-5 md:py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] hover:bg-dun-cream hover:text-dun-dark transition-all duration-300 font-normal whitespace-nowrap shadow-sm hover:shadow',
+              isActive('/contacto') && 'bg-dun-cream text-dun-dark',
+            ]}
           >
             Contacto
           </a>
@@ -112,9 +164,10 @@ const isActive = (target: string) => {
         <div class="md:col-span-3">
           <p class="text-[10px] uppercase tracking-[0.3em] text-dun-dark/50 mb-4 font-light">Navegación</p>
           <ul class="space-y-2.5 text-sm font-light">
-            <li><a href={`${base}/`} class="footer-link">Proyectos</a></li>
-            <li><a href={`${base}/obras-anteriores`} class="footer-link">Trayectoria</a></li>
-            <li><a href={`${base}/sobre-mi`} class="footer-link">Estudio</a></li>
+            <li><a href={`${base}/#proyectos`} class="footer-link">Proyectos</a></li>
+            <li><a href={`${base}/obras-anteriores`} class="footer-link">Patrimonio</a></li>
+            <li><a href={`${base}/sobre-mi`} class="footer-link">Sobre mí</a></li>
+            <li><a href={`${base}/contacto`} class="footer-link">Contacto</a></li>
           </ul>
         </div>
 

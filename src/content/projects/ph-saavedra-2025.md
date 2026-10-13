@@ -1,5 +1,6 @@
 ---
 title: "PH Saavedra"
+description: "Reforma integral de PH de 85 m²: redistribución de ambientes, recuperación de pisos originales y apertura al patio central."
 location: "Saavedra, CABA"
 year: 2025
 category: "Reforma"

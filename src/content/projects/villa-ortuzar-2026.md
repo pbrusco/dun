@@ -1,5 +1,6 @@
 ---
 title: "Reforma Villa Ortúzar"
+description: "Reforma integral de vivienda: demoliciones, integración de ambientes, nuevas instalaciones y cocina abierta."
 location: "Villa Ortúzar, CABA"
 year: 2026
 category: "Reforma"

@@ -1,5 +1,6 @@
 ---
 title: "Selección de Baños"
+description: "Selección de baños renovados: cambio integral de cañerías, impermeabilización, mamparas de cristal y porcelanatos rectificados."
 location: "CABA y Zona Norte"
 year: 2026
 category: "Reforma"

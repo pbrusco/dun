@@ -1,5 +1,6 @@
 ---
 title: "Local Palermo"
+description: "Interiorismo y adecuación comercial: diseño lumínico, renovación de solados y equipamiento a medida en Palermo Soho."
 location: "Palermo, CABA"
 year: 2021
 category: "Interiorismo"

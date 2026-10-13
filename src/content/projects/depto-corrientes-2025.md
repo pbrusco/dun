@@ -1,5 +1,6 @@
 ---
 title: "Departamento Av. Corrientes"
+description: "Refuncionalización de departamento en edificio histórico: integración espacial de estar y cocina, confort acústico y lumínico."
 location: "Centro, CABA"
 year: 2025
 category: "Reforma"

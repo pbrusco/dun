@@ -1,5 +1,6 @@
 ---
 title: "Cocina Devoto"
+description: "Dirección y ejecución integral de obra: saneamiento de cimientos, contrapiso hidrófugo, nuevas instalaciones y cocina a medida."
 location: "Villa Devoto, CABA"
 year: 2026
 category: "Reforma"

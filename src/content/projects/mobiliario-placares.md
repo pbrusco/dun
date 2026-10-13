@@ -1,5 +1,6 @@
 ---
 title: "Mobiliario a Medida · Placares"
+description: "Diseño y fabricación de placares y vestidores a medida: interiores optimizados, frentes de piso a techo y herrajes premium."
 location: "Buenos Aires"
 year: 2026
 category: "Interiorismo"
