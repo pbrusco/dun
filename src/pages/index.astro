@@ -26,116 +26,100 @@ const projectOrder = (slug: string) => {
   };
   return m[slug] ?? 99;
 };
-const reforms = allProjects
-  .filter((p) => p.data.category !== 'Patrimonio')
-  .sort((a, b) => projectOrder(a.slug) - projectOrder(b.slug));
+const projects = allProjects.sort((a, b) => projectOrder(a.slug) - projectOrder(b.slug));
 
+const heroProjects = projects.slice(0, 5);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const currentYear = new Date().getFullYear();
+
+const filters = [
+  { key: 'todos', label: 'Todos' },
+  { key: 'cocinas', label: 'Cocinas' },
+  { key: 'banos', label: 'Baños' },
+  { key: 'reformas', label: 'Reformas' },
+  { key: 'mobiliario', label: 'Mobiliario' },
+  { key: 'comercial', label: 'Comercial' },
+];
 ---
 
 <Layout
   title="DUN · Estudio de arquitectura"
   description="DUN · Estudio de arquitectura en Buenos Aires. Obras y proyectos de Daniela Estevez Vredjian."
 >
-  <!-- ===========================================
-       HERO — Propuesta clara y dos públicos
-  =========================================== -->
-  <section class="relative overflow-hidden">
-    <!-- Meta strip -->
-    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-8 md:pt-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/60 font-light anim-rise">
-      <span>Estudio de Arquitectura · Buenos Aires</span>
-      <span class="text-right">2021 — 2026</span>
+  <!-- Portada: obras recientes a pantalla completa -->
+  <section id="portada" class="relative w-full overflow-hidden bg-dun-darker h-[calc(100svh-4rem)] min-h-[480px]" aria-label="Obras destacadas">
+    {heroProjects.map((p, i) => (
+      <a
+        href={`${base}/projects/${p.slug}`}
+        data-hero-slide
+        aria-hidden={i === 0 ? 'false' : 'true'}
+        tabindex={i === 0 ? 0 : -1}
+        class:list={['absolute inset-0 block transition-opacity duration-[1400ms] ease-in-out', i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none']}
+      >
+        <Image
+          src={p.data.cover}
+          alt={p.data.title}
+          widths={[640, 1024, 1600]}
+          sizes="100vw"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          class="hero-img absolute inset-0 w-full h-full object-cover"
+        />
+      </a>
+    ))}
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-dun-darker via-dun-darker/40 to-dun-darker/10"></div>
+
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 max-w-7xl mx-auto px-6 md:px-10 pb-20 md:pb-24">
+      <h1 class="anim-rise">
+        <span class="block text-6xl md:text-8xl font-thin tracking-[0.06em] text-dun-cream">DUN</span>
+        <span class="block mt-2 text-[11px] md:text-sm font-extralight tracking-[0.25em] uppercase text-dun-cream">Estudio de arquitectura · Buenos Aires</span>
+      </h1>
+      <p class="mt-6 text-[11px] uppercase tracking-[0.25em] text-dun-cream-dark" aria-live="off">
+        {heroProjects.map((p, i) => (
+          <span data-hero-caption class:list={[i === 0 ? '' : 'hidden']}>{[p.data.title, p.data.year].filter(Boolean).join(' · ')}</span>
+        ))}
+      </p>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-24 pb-12 md:pb-24">
-      <header>
-        <h1 class="anim-rise" style="--rise-delay: 120ms">
-          <span class="block text-[22vw] md:text-[14vw] xl:text-[12rem] font-thin leading-[0.95] tracking-[0.04em] text-dun-cream">
-            DUN
-          </span>
-          <span class="block mt-4 text-[5vw] md:text-[2vw] xl:text-3xl font-extralight tracking-[0.2em] uppercase text-dun-cream-dark">
-            Estudio de arquitectura
-          </span>
-        </h1>
-
-        <!-- Immediate Primary CTAs -->
-        <div class="mt-10 md:mt-12 flex flex-wrap items-center gap-4 anim-rise" style="--rise-delay: 600ms">
-          <a
-            href="#proyectos"
-            class="inline-flex items-center gap-2.5 px-6 py-3 bg-dun-cream text-dun-dark text-[11px] uppercase tracking-[0.22em] font-medium hover:bg-dun-cream-dark transition-all duration-300 shadow-sm"
-          >
-            <span>Ver obras</span>
-            <span class="text-xs">↓</span>
-          </a>
-          <a
-            href={`${base}/contacto`}
-            class="inline-flex items-center gap-2.5 px-6 py-3 border border-dun-cream/50 text-dun-cream hover:border-dun-cream hover:bg-dun-cream/10 text-[11px] uppercase tracking-[0.22em] font-light transition-all duration-300"
-          >
-            <span>Iniciar consulta</span>
-            <span class="text-xs">→</span>
-          </a>
-        </div>
-      </header>
-    </div>
-
-    <!-- Hairline rule -->
-    <div class="max-w-7xl mx-auto px-6 md:px-10">
-      <div class="dun-rule"></div>
+    <div class="absolute inset-x-0 bottom-0 max-w-7xl mx-auto px-6 md:px-10 pb-5 flex items-center justify-between">
+      <div class="flex items-center">
+        {heroProjects.map((p, i) => (
+          <button type="button" data-hero-dot={i} aria-label={`Ver ${p.data.title}`} aria-current={i === 0 ? 'true' : 'false'} class="group w-11 h-11 flex items-center justify-center cursor-pointer">
+            <span class="block h-px w-6 bg-dun-cream/40 group-aria-[current=true]:bg-dun-cream transition-colors"></span>
+          </button>
+        ))}
+      </div>
+      <a href="#proyectos" class="inline-flex items-center gap-2 min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream hover:text-white transition">
+        Ver obras <span aria-hidden="true">↓</span>
+      </a>
     </div>
   </section>
 
-  <!-- ===========================================
-       PROJECT CATALOG & INTERACTIVE FILTERS
-  =========================================== -->
+  <!-- Obras -->
   {
-    reforms.length > 0 && (
-      <section id="proyectos" class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
-        <div class="mb-10 md:mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-dun-cream/10 pb-8">
-          <div>
-            <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Proyectos</p>
-            <h2 class="text-2xl md:text-4xl font-extralight tracking-wide text-dun-cream">
-              Obras
-            </h2>
-          </div>
+    projects.length > 0 && (
+      <section id="proyectos" class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-16 md:pb-24 scroll-mt-16">
+        <nav aria-label="Filtro de obras" class="mb-8 md:mb-12 flex items-center gap-2 overflow-x-auto no-scrollbar -mx-6 px-6 md:mx-0 md:px-0 py-1">
+          {filters.map((f, i) => (
+            <button
+              type="button"
+              data-filter-btn={f.key}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              class:list={[
+                'filter-btn px-4 min-h-11 text-[11px] uppercase tracking-[0.2em] rounded-full border transition-all duration-300 cursor-pointer whitespace-nowrap',
+                i === 0
+                  ? 'border-dun-cream bg-dun-cream text-dun-dark font-normal'
+                  : 'border-dun-cream/30 text-dun-cream-dark hover:border-dun-cream/60 hover:text-dun-cream font-light',
+              ]}
+            >
+              {f.label}
+            </button>
+          ))}
+        </nav>
 
-          <!-- Filter pills bar -->
-          <nav aria-label="Filtro de proyectos" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            <button
-              type="button"
-              data-filter-btn="todos"
-              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream bg-dun-cream text-dun-dark font-normal transition-all duration-300 cursor-pointer whitespace-nowrap"
-            >
-              Todos
-            </button>
-            <button
-              type="button"
-              data-filter-btn="reformas"
-              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream/25 text-dun-cream-dark/75 hover:border-dun-cream/60 hover:text-dun-cream font-light transition-all duration-300 cursor-pointer whitespace-nowrap"
-            >
-              Reformas integrales
-            </button>
-            <button
-              type="button"
-              data-filter-btn="cocinas-banos"
-              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream/25 text-dun-cream-dark/75 hover:border-dun-cream/60 hover:text-dun-cream font-light transition-all duration-300 cursor-pointer whitespace-nowrap"
-            >
-              Cocinas & Baños
-            </button>
-            <button
-              type="button"
-              data-filter-btn="mobiliario"
-              class="filter-btn px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] rounded-full border border-dun-cream/25 text-dun-cream-dark/75 hover:border-dun-cream/60 hover:text-dun-cream font-light transition-all duration-300 cursor-pointer whitespace-nowrap"
-            >
-              Mobiliario a medida
-            </button>
-          </nav>
-        </div>
-
-        <!-- Project cards grid -->
-        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-          {reforms.map((project, i) => (
-            <ProjectCard project={project} index={i + 1} />
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-12 md:gap-y-14">
+          {projects.map((project, i) => (
+            <div class={i === 0 ? 'md:col-span-2 lg:col-span-3' : ''} data-project-wrap>
+              <ProjectCard project={project} index={i + 1} variant={i === 0 ? 'featured' : 'default'} />
+            </div>
           ))}
         </div>
       </section>
@@ -170,7 +154,7 @@ const currentYear = new Date().getFullYear();
 
       <div class="relative z-10 grid md:grid-cols-12 gap-8 items-center">
         <div class="md:col-span-8">
-          <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/70 mb-4">
+          <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark mb-4">
             <span class="w-6 h-px bg-dun-cream-dark/40"></span>
             <span>Trayectoria</span>
           </div>
@@ -199,36 +183,53 @@ const currentYear = new Date().getFullYear();
 </Layout>
 
 <script>
-  // Filter pills interaction
+
+  const slides = document.querySelectorAll<HTMLElement>('[data-hero-slide]');
+  const dots = document.querySelectorAll<HTMLButtonElement>('[data-hero-dot]');
+  const caps = document.querySelectorAll<HTMLElement>('[data-hero-caption]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur = 0;
+  let timer: number | undefined;
+  const show = (n: number) => {
+    cur = (n + slides.length) % slides.length;
+    slides.forEach((el, i) => {
+      const on = i === cur;
+      el.classList.toggle('opacity-100', on);
+      el.classList.toggle('opacity-0', !on);
+      el.classList.toggle('pointer-events-none', !on);
+      el.setAttribute('aria-hidden', String(!on));
+      el.tabIndex = on ? 0 : -1;
+    });
+    dots.forEach((d, i) => d.setAttribute('aria-current', String(i === cur)));
+    caps.forEach((c, i) => c.classList.toggle('hidden', i !== cur));
+  };
+  const start = () => {
+    if (reduce || slides.length < 2) return;
+    stop();
+    timer = window.setInterval(() => show(cur + 1), 5500);
+  };
+  const stop = () => { if (timer) window.clearInterval(timer); };
+  dots.forEach((d, i) => d.addEventListener('click', () => { show(i); start(); }));
+  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  start();
   const filterBtns = document.querySelectorAll<HTMLButtonElement>('[data-filter-btn]');
-  const cards = document.querySelectorAll<HTMLElement>('[data-project-card]');
+  const wraps = document.querySelectorAll<HTMLElement>('[data-project-wrap]');
+  const on = ['bg-dun-cream', 'text-dun-dark', 'border-dun-cream', 'font-normal'];
+  const off = ['text-dun-cream-dark', 'border-dun-cream/30', 'font-light'];
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const target = btn.dataset.filterBtn;
-      if (!target) return;
-
-      // Update button styling
       filterBtns.forEach((b) => {
-        const isMatch = b === btn;
-        if (isMatch) {
-          b.classList.add('bg-dun-cream', 'text-dun-dark', 'border-dun-cream', 'font-normal');
-          b.classList.remove('bg-transparent', 'text-dun-cream-dark/75', 'border-dun-cream/25', 'font-light');
-        } else {
-          b.classList.remove('bg-dun-cream', 'text-dun-dark', 'border-dun-cream', 'font-normal');
-          b.classList.add('bg-transparent', 'text-dun-cream-dark/75', 'border-dun-cream/25', 'font-light');
-        }
+        const active = b === btn;
+        b.setAttribute('aria-pressed', String(active));
+        b.classList.remove(...(active ? off : on));
+        b.classList.add(...(active ? on : off));
       });
-
-      // Filter cards
-      cards.forEach((card) => {
-        const group = card.dataset.group;
-        const visible = target === 'todos' || group === target;
-        if (visible) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
+      wraps.forEach((w) => {
+        const card = w.querySelector<HTMLElement>('[data-project-card]');
+        const visible = target === 'todos' || card?.dataset.group === target;
+        w.style.display = visible ? '' : 'none';
       });
     });
   });
@@ -241,6 +242,17 @@ const currentYear = new Date().getFullYear();
   }
 
   /* Hide scrollbar for category pills on horizontal scroll */
+  @keyframes hero-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+  .hero-img {
+    animation: hero-zoom 12s ease-out both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-img { animation: none; }
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

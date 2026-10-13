@@ -13,10 +13,13 @@ const { before, after, beforeLabel = 'Antes', afterLabel = 'Después' } = Astro.
 
 // Unique ID so multiple sliders on the same page don't conflict
 const id = Math.random().toString(36).slice(2, 8);
+const portrait = after.height > after.width;
+const aspect = portrait ? 'aspect-[3/4] max-w-md mx-auto' : 'aspect-[4/3] md:aspect-video';
 ---
 
 <div
-  class="relative w-full aspect-video overflow-hidden cursor-ew-resize select-none rounded-xl"
+  class={`relative w-full ${aspect} overflow-hidden cursor-ew-resize select-none rounded-xl`}
+  style="touch-action: pan-y"
   id={`slider-${id}`}
   data-slider
 >

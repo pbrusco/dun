@@ -1,0 +1,81 @@
+---
+// Visor de fotos a pantalla completa.
+// Uso: en cada foto, un <button data-lightbox="grupo" data-full="URL" data-alt="texto">.
+// Las fotos con el mismo "grupo" se recorren con flechas, teclado o deslizando.
+---
+
+<div
+  id="lightbox"
+  class="fixed inset-0 z-[100] hidden bg-dun-darker/95 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Visor de fotos"
+>
+  <button type="button" data-lb-close class="absolute top-3 right-3 md:top-5 md:right-5 w-12 h-12 flex items-center justify-center text-dun-cream text-3xl leading-none hover:text-white" aria-label="Cerrar">×</button>
+  <button type="button" data-lb-prev class="absolute left-1 md:left-5 top-1/2 -translate-y-1/2 w-12 h-16 flex items-center justify-center text-dun-cream text-3xl hover:text-white" aria-label="Foto anterior">‹</button>
+  <button type="button" data-lb-next class="absolute right-1 md:right-5 top-1/2 -translate-y-1/2 w-12 h-16 flex items-center justify-center text-dun-cream text-3xl hover:text-white" aria-label="Foto siguiente">›</button>
+  <div class="absolute inset-0 flex items-center justify-center px-12 md:px-24 py-16" data-lb-stage>
+    <img data-lb-img alt="" class="max-w-full max-h-full object-contain select-none" />
+  </div>
+  <p data-lb-count class="absolute bottom-4 inset-x-0 text-center text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark"></p>
+</div>
+
+<script>
+  const box = document.getElementById('lightbox') as HTMLElement;
+  const img = box.querySelector('[data-lb-img]') as HTMLImageElement;
+  const count = box.querySelector('[data-lb-count]') as HTMLElement;
+  const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-lightbox]'));
+  let group: HTMLElement[] = [];
+  let i = 0;
+  let opener: HTMLElement | null = null;
+
+  function show() {
+    const t = group[i];
+    img.src = t.dataset.full ?? '';
+    img.alt = t.dataset.alt ?? '';
+    count.textContent = group.length > 1 ? `${i + 1} / ${group.length}` : '';
+    box.querySelector<HTMLElement>('[data-lb-prev]')!.style.display = group.length > 1 ? '' : 'none';
+    box.querySelector<HTMLElement>('[data-lb-next]')!.style.display = group.length > 1 ? '' : 'none';
+    // precarga la vecina
+    const n = group[(i + 1) % group.length];
+    if (n?.dataset.full) new Image().src = n.dataset.full;
+  }
+  function open(t: HTMLElement) {
+    opener = t;
+    group = triggers.filter((x) => x.dataset.lightbox === t.dataset.lightbox);
+    i = group.indexOf(t);
+    show();
+    box.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    box.querySelector<HTMLElement>('[data-lb-close]')!.focus();
+  }
+  function close() {
+    box.classList.add('hidden');
+    document.body.style.overflow = '';
+    img.src = '';
+    opener?.focus();
+  }
+  const go = (d: number) => { i = (i + d + group.length) % group.length; show(); };
+
+  triggers.forEach((t) => t.addEventListener('click', () => open(t)));
+  box.querySelector('[data-lb-close]')!.addEventListener('click', close);
+  box.querySelector('[data-lb-prev]')!.addEventListener('click', () => go(-1));
+  box.querySelector('[data-lb-next]')!.addEventListener('click', () => go(1));
+  box.addEventListener('click', (e) => {
+    const el = e.target as HTMLElement;
+    if (el === box || el.hasAttribute('data-lb-stage')) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (box.classList.contains('hidden')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+  // deslizar en el celular
+  let x0 = 0;
+  box.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50 && group.length > 1) go(dx < 0 ? 1 : -1);
+  });
+</script>
