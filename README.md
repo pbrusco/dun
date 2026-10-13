@@ -2,7 +2,7 @@
 
 Sitio web del estudio. Hecho con [Astro](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/), publicado en GitHub Pages.
 
-**URL en producción:** https://pbrusco.github.io/dun
+**URL en producción:** https://dunarquitectura.com.ar
 
 ---
 

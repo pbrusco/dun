@@ -9,6 +9,6 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: true }),
   ],
-  site: 'https://pbrusco.github.io/dun',
-  base: '/dun',
+  site: 'https://dunarquitectura.com.ar',
+  base: '/',
 });
