@@ -1,6 +1,5 @@
 ---
 title: "Cocina Villa Urquiza"
-description: "Modernización integral de cocina: renovación de solados, alacenas y bajo mesadas a medida con herrajes de cierre suave."
 location: "Villa Urquiza, CABA"
 year: 2025
 category: "Reforma"
@@ -15,7 +14,3 @@ gallery:
   - "../../assets/images/cocina-villa-urquiza-2025/proceso-02.jpg"
   - "../../assets/images/cocina-villa-urquiza-2025/proceso-03.jpg"
 ---
-
-### Sobre este proyecto
-
-Reforma y modernización de cocina en Villa Urquiza. Renovación de solado, nuevo diseño de bajo mesadas y alacenas a medida con herrajes de cierre suave, optimizando las áreas de trabajo y almacenamiento.

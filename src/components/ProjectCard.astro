@@ -17,17 +17,20 @@ const aspect = variant === 'featured' ? 'aspect-[16/9] md:aspect-[21/9]' : 'aspe
 
 const getFilterGroup = (slug: string) => {
   if (['ph-saavedra-2025', 'villa-ortuzar-2026', 'depto-corrientes-2025'].includes(slug)) return 'reformas';
-  if (['cocina-devoto-2026', 'depto-saavedra-2025', 'cocina-palermo-2025', 'cocina-villa-urquiza-2025', 'banos'].includes(slug)) return 'cocinas-banos';
+  if (['cocina-devoto-2026', 'depto-saavedra-2025', 'cocina-palermo-2025', 'cocina-villa-urquiza-2025'].includes(slug) || slug.startsWith('bano-')) return 'cocinas-banos';
   return 'mobiliario';
 };
 const filterGroup = getFilterGroup(project.slug);
 
 const specialBadges: Record<string, string> = {
-  'banos': 'Selección de baños',
-  'mobiliario-placares': 'Mobiliario a medida',
   'local-palermo-2021': 'Comercial',
 };
-const badgeLabel = specialBadges[project.slug] ?? category;
+const badgeLabel = project.slug.startsWith('bano-')
+  ? 'Baño'
+  : project.slug.startsWith('placard-')
+    ? 'Mobiliario a medida'
+    : (specialBadges[project.slug] ?? category);
+const hasSpecialBadge = project.slug.startsWith('bano-') || project.slug.startsWith('placard-') || project.slug in specialBadges;
 ---
 
 <a
@@ -67,7 +70,7 @@ const badgeLabel = specialBadges[project.slug] ?? category;
 
     <!-- Category / Special chip -->
     <span class={`absolute top-3 md:top-4 right-3 md:right-4 px-2.5 py-1 text-[10px] font-light tracking-[0.25em] uppercase border backdrop-blur-sm ${
-      specialBadges[project.slug]
+      hasSpecialBadge
         ? 'border-dun-cream-dark/60 text-dun-cream-dark bg-dun-darker/60'
         : 'border-dun-cream/40 text-dun-cream bg-dun-darker/30'
     }`}>

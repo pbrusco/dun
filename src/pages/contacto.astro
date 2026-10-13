@@ -1,15 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <Layout
   title="Contacto | DUN · estudio de arquitectura"
-  description="Contactá a Daniela Estevez Vredjian para coordinar una primera visita y presupuestar tu reforma en Buenos Aires. WhatsApp +54 9 11 6237-4256 o email."
+  description="Contacto de DUN · Estudio de arquitectura. WhatsApp +54 9 11 6237-4256 o email."
 >
   <section class="max-w-7xl mx-auto px-6 md:px-10 pt-12 md:pt-20 pb-20 md:pb-32">
-    <!-- Breadcrumb -->
     <a
       href={`${base}/`}
       class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-dun-muted hover:text-dun-cream-dark transition mb-10 md:mb-16 anim-rise"
@@ -18,102 +16,37 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </a>
 
     <header class="mb-14 md:mb-20">
-      <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-4">Contacto directo</p>
+      <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-4">Contacto</p>
       <h1 class="text-4xl sm:text-5xl md:text-7xl font-thin tracking-tight text-dun-cream leading-[1.05] max-w-4xl">
-        ¿Pensando en una reforma?<br />
-        <span class="text-dun-cream-dark italic-faux font-light">Conversemos</span>.
+        Conversemos.
       </h1>
-      <p class="mt-6 md:mt-8 text-base md:text-lg text-dun-cream-dark/80 font-light max-w-2xl leading-relaxed">
-        Trabajamos en la Ciudad de Buenos Aires y Gran Buenos Aires. Coordinamos una primera visita para escuchar tus necesidades, evaluar el estado de tu propiedad y elaborar una propuesta a medida sin sorpresas.
-      </p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 pt-8 border-t border-dun-cream/15">
-      <!-- WhatsApp Primario -->
-      <div class="md:col-span-6 space-y-6">
-        <div class="p-8 md:p-10 border border-dun-cream/25 bg-dun-darker/50 backdrop-blur-sm space-y-6">
-          <div class="flex items-center gap-3">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/80">Canal preferido · Respuesta rápida</span>
-          </div>
-          <h2 class="text-2xl md:text-3xl font-extralight text-dun-cream">WhatsApp</h2>
-          <p class="text-sm font-light text-dun-cream-dark/85 leading-relaxed">
-            Iniciá una consulta directa para coordinar un relevamiento técnico o enviarnos fotos de tu espacio actual.
-          </p>
-          <a
-            href="https://wa.me/5491162374256?text=Hola%20Daniela,%20me%20gustar%C3%ADa%20consultarte%20por%20un%20proyecto"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-between w-full px-6 py-4 bg-dun-cream hover:bg-dun-cream-dark text-dun-dark text-[11px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md group"
-          >
-            <span>Escribir por WhatsApp</span>
-            <span class="text-base group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-          <p class="text-xs text-dun-cream-dark/70 font-light text-center">
-            Teléfono directo: <span class="text-dun-cream font-normal">+54 9 11 6237-4256</span>
-          </p>
-        </div>
+    <div class="max-w-xl space-y-8 pt-8 border-t border-dun-cream/15">
+      <a
+        href="https://wa.me/5491162374256?text=Hola%20Daniela,%20me%20gustar%C3%ADa%20consultarte%20por%20un%20proyecto"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-between w-full px-6 py-4 bg-dun-cream hover:bg-dun-cream-dark text-dun-dark text-[11px] uppercase tracking-[0.25em] font-medium transition-all duration-300"
+      >
+        <span>Escribir por WhatsApp</span>
+        <span class="text-base">→</span>
+      </a>
 
-        <!-- Email & Instagram -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-6 border border-dun-cream/15 bg-dun-darker/30 space-y-3">
-            <p class="text-[10px] uppercase tracking-[0.25em] text-dun-muted">Correo electrónico</p>
-            <p class="text-xs text-dun-cream-dark/90 font-light break-words">
-              <a href="mailto:hola.dun.arquitectura@gmail.com" class="text-dun-cream hover:underline">
-                hola.dun.arquitectura@gmail.com
-              </a>
-            </p>
-          </div>
-          <div class="p-6 border border-dun-cream/15 bg-dun-darker/30 space-y-3">
-            <p class="text-[10px] uppercase tracking-[0.25em] text-dun-muted">Instagram</p>
-            <p class="text-xs text-dun-cream-dark/90 font-light">
-              <a href="https://www.instagram.com/dun.arquitectura/" target="_blank" rel="noopener noreferrer" class="text-dun-cream hover:underline">
-                @dun.arquitectura
-              </a>
-            </p>
-          </div>
+      <dl class="space-y-4 text-sm font-light">
+        <div class="flex items-center gap-4">
+          <dt class="text-[10px] uppercase tracking-[0.25em] text-dun-muted w-24 shrink-0">WhatsApp</dt>
+          <dd><a href="https://wa.me/5491162374256" target="_blank" rel="noopener noreferrer" class="text-dun-cream hover:underline">+54 9 11 6237-4256</a></dd>
         </div>
-      </div>
-
-      <!-- Cobertura y Proceso inicial -->
-      <div class="md:col-span-6 space-y-8 md:pl-6">
-        <div>
-          <h3 class="text-xs uppercase tracking-[0.3em] text-dun-cream mb-3">Zona de trabajo</h3>
-          <p class="text-base font-light text-dun-cream-dark/85 leading-relaxed">
-            Ciudad Autónoma de Buenos Aires (Saavedra, Devoto, Villa Urquiza, Palermo, Belgrano, Colegiales, Núñez, Recoleta, Centro) y Zona Norte de Gran Buenos Aires (Vicente López, Olivos, Florida, San Isidro).
-          </p>
+        <div class="flex items-center gap-4">
+          <dt class="text-[10px] uppercase tracking-[0.25em] text-dun-muted w-24 shrink-0">Email</dt>
+          <dd><a href="mailto:hola.dun.arquitectura@gmail.com" class="text-dun-cream hover:underline break-all">hola.dun.arquitectura@gmail.com</a></dd>
         </div>
-
-        <div>
-          <h3 class="text-xs uppercase tracking-[0.3em] text-dun-cream mb-3">¿Cómo empezamos?</h3>
-          <ol class="space-y-4 text-sm font-light text-dun-cream-dark/85">
-            <li class="flex items-start gap-3">
-              <span class="text-dun-cream font-mono text-xs mt-0.5">01.</span>
-              <span><strong>Primer contacto:</strong> Nos contás sobre tu idea, tipo de inmueble y plazos estimados.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-dun-cream font-mono text-xs mt-0.5">02.</span>
-              <span><strong>Visita técnica:</strong> Relevamos la propiedad para evaluar estado constructivo y potencial.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-dun-cream font-mono text-xs mt-0.5">03.</span>
-              <span><strong>Propuesta & Presupuesto:</strong> Presentamos el anteproyecto y cómputo cerrado, sin costos ocultos.</span>
-            </li>
-          </ol>
+        <div class="flex items-center gap-4">
+          <dt class="text-[10px] uppercase tracking-[0.25em] text-dun-muted w-24 shrink-0">Instagram</dt>
+          <dd><a href="https://www.instagram.com/dun.arquitectura/" target="_blank" rel="noopener noreferrer" class="text-dun-cream hover:underline">@dun.arquitectura</a></dd>
         </div>
-
-        <div class="p-5 border-l-2 border-dun-cream-dark/40 bg-dun-cream/5 text-xs text-dun-cream-dark/90 font-light leading-relaxed">
-          <p>
-            <strong class="text-dun-cream font-normal">Compromiso de dirección personalizada:</strong> Cada obra es dirigida personalmente por la arquitecta Daniela Estevez Vredjian, asegurando rigor técnico, control de plazos y atención minuciosa en cada detalle.
-          </p>
-        </div>
-      </div>
+      </dl>
     </div>
   </section>
 </Layout>
-
-<style>
-  .italic-faux {
-    font-style: italic;
-  }
-</style>

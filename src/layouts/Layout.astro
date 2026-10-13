@@ -6,7 +6,7 @@ interface Props {
 
 const {
   title,
-  description = 'DUN Arquitectura — Reformas integrales y restauración de patrimonio histórico en Buenos Aires.',
+  description = 'DUN · Estudio de arquitectura en Buenos Aires.',
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -71,11 +71,6 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
           "addressRegion": "CABA",
           "addressCountry": "AR"
         },
-        "areaServed": [
-          "Ciudad Autónoma de Buenos Aires",
-          "Gran Buenos Aires",
-          "Zona Norte"
-        ],
         "sameAs": [
           "https://www.instagram.com/dun.arquitectura/"
         ]

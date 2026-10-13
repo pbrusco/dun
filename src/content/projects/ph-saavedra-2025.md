@@ -1,6 +1,5 @@
 ---
 title: "PH Saavedra"
-description: "Reforma integral de PH de 85 m²: redistribución de ambientes, recuperación de pisos originales y apertura al patio central."
 location: "Saavedra, CABA"
 year: 2025
 category: "Reforma"
@@ -19,7 +18,3 @@ gallery:
   - "../../assets/images/ph-saavedra-2025/proceso-01.jpeg"
   - "../../assets/images/ph-saavedra-2025/proceso-02.jpg"
 ---
-
-### Sobre este proyecto
-
-Reforma integral de un PH tradicional en Saavedra. Reconfiguración espacial completa para integrar cocina, estar y comedor hacia el patio central, maximizando la luminosidad y creando una fluidez contemporánea que respeta la calidez original de la vivienda.

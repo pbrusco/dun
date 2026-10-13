@@ -1,6 +1,5 @@
 ---
 title: "Cocina · Depto Saavedra"
-description: "Renovación completa de cocina: redistribución lineal, ampliación de mesadas, iluminación bajo alacena y revestimientos cerámicos."
 location: "Saavedra, CABA"
 year: 2025
 category: "Reforma"
@@ -15,7 +14,3 @@ gallery:
   - "../../assets/images/depto-saavedra-2025/proceso-02.jpg"
   - "../../assets/images/depto-saavedra-2025/proceso-03.jpg"
 ---
-
-### Sobre este proyecto
-
-Renovación de cocina en departamento de Saavedra. Se rediseñó la distribución lineal para incorporar mayor mesada de trabajo, iluminación bajo alacena y revestimientos cerámicos subway que potencian la claridad y amplitud del espacio.

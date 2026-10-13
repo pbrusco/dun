@@ -10,14 +10,19 @@ const projectOrder = (slug: string) => {
   const m: Record<string, number> = {
     'cocina-devoto-2026': 1,
     'villa-ortuzar-2026': 2,
-    'depto-saavedra-2025': 3,
-    'cocina-palermo-2025': 4,
-    'cocina-villa-urquiza-2025': 5,
-    'ph-saavedra-2025': 6,
-    'depto-corrientes-2025': 7,
-    'banos': 8,
-    'mobiliario-placares': 9,
-    'local-palermo-2021': 10,
+    'bano-caballito-2026': 3,
+    'bano-barracas-2026': 4,
+    'depto-saavedra-2025': 5,
+    'cocina-palermo-2025': 6,
+    'cocina-villa-urquiza-2025': 7,
+    'ph-saavedra-2025': 8,
+    'depto-corrientes-2025': 9,
+    'bano-ph-saavedra-2025': 10,
+    'bano-palermo-2025': 11,
+    'bano-olivos-2025': 12,
+    'placard-villa-urquiza-2025': 13,
+    'placard-villa-pueyrredon-2025': 14,
+    'local-palermo-2021': 15,
   };
   return m[slug] ?? 99;
 };
@@ -30,8 +35,8 @@ const currentYear = new Date().getFullYear();
 ---
 
 <Layout
-  title="DUN · Arquitectura, reformas y restauración en Buenos Aires"
-  description="Estudio de arquitectura especializado en reformas integrales de viviendas y restauración de patrimonio en Buenos Aires. Proyectamos, coordinamos y dirigimos cada obra llave en mano."
+  title="DUN · Estudio de arquitectura"
+  description="DUN · Estudio de arquitectura en Buenos Aires. Obras y proyectos de Daniela Estevez Vredjian."
 >
   <!-- ===========================================
        HERO — Propuesta clara y dos públicos
@@ -46,39 +51,13 @@ const currentYear = new Date().getFullYear();
     <div class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-24 pb-12 md:pb-24">
       <header>
         <h1 class="anim-rise" style="--rise-delay: 120ms">
-          <span class="block text-[13vw] sm:text-[14vw] md:text-[10vw] xl:text-[9rem] font-thin leading-[0.95] tracking-[-0.01em] text-dun-cream">
-            Diseñando
+          <span class="block text-[22vw] md:text-[14vw] xl:text-[12rem] font-thin leading-[0.95] tracking-[0.04em] text-dun-cream">
+            DUN
           </span>
-          <span class="block text-[13vw] sm:text-[14vw] md:text-[10vw] xl:text-[9rem] font-thin leading-[0.95] tracking-[-0.01em] text-dun-cream pl-[8%] md:pl-[14%] italic-faux">
-            espacios,
-          </span>
-          <span class="block text-[13vw] sm:text-[14vw] md:text-[10vw] xl:text-[9rem] font-extralight leading-[0.95] tracking-[-0.01em] text-dun-cream-dark mt-2 md:mt-4">
-            preservando
-          </span>
-          <span class="block text-[13vw] sm:text-[14vw] md:text-[10vw] xl:text-[9rem] font-light leading-[0.95] tracking-[-0.01em] text-dun-cream-dark pl-[20%] md:pl-[28%]">
-            historias.
+          <span class="block mt-4 text-[5vw] md:text-[2vw] xl:text-3xl font-extralight tracking-[0.2em] uppercase text-dun-cream-dark">
+            Estudio de arquitectura
           </span>
         </h1>
-
-        <div class="mt-12 md:mt-16 anim-rise" style="--rise-delay: 480ms">
-          <p class="text-base md:text-xl text-dun-cream-dark/85 leading-[1.8] font-light tracking-wide max-w-3xl">
-            Arquitectura de autor especializada en <strong>reformas integrales de viviendas</strong> y <strong>restauración de patrimonio</strong> en Buenos Aires. Proyecto, coordino y dirijo cada obra de principio a fin, combinando calidez residencial con rigor constructivo y cumplimiento estricto de plazos y costos.
-          </p>
-
-          <!-- Dos líneas explícitas de trabajo -->
-          <div class="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl text-xs font-light">
-            <div class="p-4 border border-dun-cream/20 bg-dun-darker/40">
-              <p class="text-[10px] uppercase tracking-[0.25em] text-dun-cream-dark mb-1">Línea 01 · Vivienda particular</p>
-              <p class="text-dun-cream font-normal text-sm">Reformas integrales & Cocinas</p>
-              <p class="text-dun-cream-dark/75 mt-1 leading-relaxed">Dirección de obra llave en mano, terminaciones cuidadas y presupuesto cerrado sin sorpresas.</p>
-            </div>
-            <div class="p-4 border border-dun-cream/20 bg-dun-darker/40">
-              <p class="text-[10px] uppercase tracking-[0.25em] text-dun-cream-dark mb-1">Línea 02 · Escala & Rigor</p>
-              <p class="text-dun-cream font-normal text-sm">Patrimonio & Gran escala</p>
-              <p class="text-dun-cream-dark/75 mt-1 leading-relaxed">Experiencia en restauración de monumentos históricos nacionales y asesoramiento técnico.</p>
-            </div>
-          </div>
-        </div>
 
         <!-- Immediate Primary CTAs -->
         <div class="mt-10 md:mt-12 flex flex-wrap items-center gap-4 anim-rise" style="--rise-delay: 600ms">
@@ -86,7 +65,7 @@ const currentYear = new Date().getFullYear();
             href="#proyectos"
             class="inline-flex items-center gap-2.5 px-6 py-3 bg-dun-cream text-dun-dark text-[11px] uppercase tracking-[0.22em] font-medium hover:bg-dun-cream-dark transition-all duration-300 shadow-sm"
           >
-            <span>Ver reformas</span>
+            <span>Ver obras</span>
             <span class="text-xs">↓</span>
           </a>
           <a
@@ -114,9 +93,9 @@ const currentYear = new Date().getFullYear();
       <section id="proyectos" class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24" data-reveal>
         <div class="mb-10 md:mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-dun-cream/10 pb-8">
           <div>
-            <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Obras recientes · {currentYear}</p>
+            <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Proyectos</p>
             <h2 class="text-2xl md:text-4xl font-extralight tracking-wide text-dun-cream">
-              Reformas & Arquitectura Residencial
+              Obras
             </h2>
           </div>
 
@@ -164,99 +143,6 @@ const currentYear = new Date().getFullYear();
   }
 
   <!-- ===========================================
-       CÓMO TRABAJAMOS — Proceso y tranquilidad
-  =========================================== -->
-  <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24 border-t border-dun-cream/10" data-reveal>
-    <div class="mb-12 md:mb-16">
-      <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Metodología de trabajo</p>
-      <h2 class="text-3xl md:text-5xl font-thin tracking-tight text-dun-cream">
-        Cómo trabajamos
-      </h2>
-      <p class="mt-4 text-base md:text-lg text-dun-cream-dark/80 font-light max-w-2xl leading-relaxed">
-        Una obra no tiene por qué ser caótica. Nuestra metodología paso a paso garantiza previsibilidad en plazos, costos cerrados y comunicación constante.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="p-6 border border-dun-cream/15 bg-dun-darker/40 space-y-4">
-        <span class="text-2xl font-thin text-dun-cream-dark/60 font-mono">01</span>
-        <h3 class="text-lg font-light text-dun-cream">Primera visita & Relevamiento</h3>
-        <p class="text-xs text-dun-cream-dark/80 font-light leading-relaxed">
-          Nos encontramos en la propiedad para escuchar tus necesidades, entender cómo vivís el espacio y diagnosticar el estado técnico de las instalaciones.
-        </p>
-      </div>
-
-      <div class="p-6 border border-dun-cream/15 bg-dun-darker/40 space-y-4">
-        <span class="text-2xl font-thin text-dun-cream-dark/60 font-mono">02</span>
-        <h3 class="text-lg font-light text-dun-cream">Proyecto & Presupuesto cerrado</h3>
-        <p class="text-xs text-dun-cream-dark/80 font-light leading-relaxed">
-          Desarrollamos los planos de distribución, selección de materiales y un cómputo métrico detallado. El presupuesto queda cerrado antes de empezar la obra.
-        </p>
-      </div>
-
-      <div class="p-6 border border-dun-cream/15 bg-dun-darker/40 space-y-4">
-        <span class="text-2xl font-thin text-dun-cream-dark/60 font-mono">03</span>
-        <h3 class="text-lg font-light text-dun-cream">Dirección & Ejecución integral</h3>
-        <p class="text-xs text-dun-cream-dark/80 font-light leading-relaxed">
-          Supervisión diaria en obra: coordinamos gremios, controlamos pedidos de compras y resolvemos imprevistos sin trasladarte estrés ni desvíos.
-        </p>
-      </div>
-
-      <div class="p-6 border border-dun-cream/15 bg-dun-darker/40 space-y-4">
-        <span class="text-2xl font-thin text-dun-cream-dark/60 font-mono">04</span>
-        <h3 class="text-lg font-light text-dun-cream">Entrega llave en mano</h3>
-        <p class="text-xs text-dun-cream-dark/80 font-light leading-relaxed">
-          Revisión final de cada detalle constructivo, limpieza completa y entrega de la vivienda con todas sus instalaciones testeadas y listas para habitar.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===========================================
-       TESTIMONIOS — Prueba social auténtica
-  =========================================== -->
-  <section class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24 border-t border-dun-cream/10" data-reveal>
-    <div class="mb-12 md:mb-16">
-      <p class="text-[10px] uppercase tracking-[0.3em] text-dun-muted mb-2">Experiencias reales</p>
-      <h2 class="text-3xl md:text-5xl font-thin tracking-tight text-dun-cream">
-        Lo que dicen quienes ya reformaron
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <article class="p-8 border border-dun-cream/20 bg-dun-darker/40 flex flex-col justify-between space-y-6">
-        <p class="text-sm font-light text-dun-cream-dark/90 leading-relaxed italic-faux">
-          «El mayor miedo que teníamos era que la obra fuera eterna y el presupuesto se descontrolara. Daniela coordinó a todos los gremios con una puntualidad impecable. Nos entregó el PH en el plazo exacto acordado y cada detalle superó lo que imaginábamos.»
-        </p>
-        <footer class="border-t border-dun-cream/10 pt-4">
-          <p class="text-sm font-normal text-dun-cream">Marina & Lucas</p>
-          <p class="text-[10px] uppercase tracking-[0.2em] text-dun-muted mt-0.5">Reforma integral PH Saavedra</p>
-        </footer>
-      </article>
-
-      <article class="p-8 border border-dun-cream/20 bg-dun-darker/40 flex flex-col justify-between space-y-6">
-        <p class="text-sm font-light text-dun-cream-dark/90 leading-relaxed italic-faux">
-          «Hacer una cocina completa viviendo en la casa era un desafío enorme, pero la planificación día a día fue clave. Daniela nos mantuvo informados en cada etapa, cuidó los materiales y resolvió imprevistos sin trasladarnos estrés. Profesionalismo absoluto.»
-        </p>
-        <footer class="border-t border-dun-cream/10 pt-4">
-          <p class="text-sm font-normal text-dun-cream">Esteban R.</p>
-          <p class="text-[10px] uppercase tracking-[0.2em] text-dun-muted mt-0.5">Reforma de cocina · Palermo</p>
-        </footer>
-      </article>
-
-      <article class="p-8 border border-dun-cream/20 bg-dun-darker/40 flex flex-col justify-between space-y-6">
-        <p class="text-sm font-light text-dun-cream-dark/90 leading-relaxed italic-faux">
-          «Buscaba a alguien con criterio de diseño pero con solvencia técnica para cambiar cañerías e instalaciones de cero. Su formación y dirección en obra hicieron que todo fuera transparente y sin sorpresas. La volvería a elegir sin dudarlo.»
-        </p>
-        <footer class="border-t border-dun-cream/10 pt-4">
-          <p class="text-sm font-normal text-dun-cream">Carolina M.</p>
-          <p class="text-[10px] uppercase tracking-[0.2em] text-dun-muted mt-0.5">Departamento Av. Corrientes</p>
-        </footer>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===========================================
        PATRIMONIO & TRAYECTORIA — banner arquitectónico
   =========================================== -->
   <section class="max-w-7xl mx-auto px-6 md:px-10 pb-20 md:pb-32" data-reveal>
@@ -286,18 +172,15 @@ const currentYear = new Date().getFullYear();
         <div class="md:col-span-8">
           <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-dun-cream-dark/70 mb-4">
             <span class="w-6 h-px bg-dun-cream-dark/40"></span>
-            <span>Trayectoria & Rigor Constructivo</span>
+            <span>Trayectoria</span>
           </div>
           <h2 class="text-3xl sm:text-4xl md:text-6xl font-thin tracking-tight text-dun-cream leading-[1.05]">
-            Patrimonio & Obras de gran escala
+            Obras anteriores
           </h2>
-          <p class="mt-4 md:mt-6 text-base md:text-lg text-dun-cream-dark/85 font-light max-w-2xl leading-relaxed">
-            La precisión técnica y el rigor constructivo aplicados a cada reforma particular provienen de años dirigiendo obras en monumentos históricos nacionales como la Manzana de las Luces y aeropuertos.
-          </p>
         </div>
         <div class="md:col-span-4 md:text-right">
           <span class="inline-flex items-center gap-3 px-6 py-3.5 border border-dun-cream/40 group-hover:border-dun-cream group-hover:bg-dun-cream group-hover:text-dun-dark text-[11px] uppercase tracking-[0.25em] text-dun-cream transition-all duration-500 shadow-sm">
-            <span>Conocer obras patrimoniales</span>
+            <span>Ver obras anteriores</span>
             <span class="text-sm">→</span>
           </span>
         </div>
@@ -309,7 +192,7 @@ const currentYear = new Date().getFullYear();
   {
     allProjects.length === 0 && (
       <section class="max-w-7xl mx-auto px-6 py-20 text-center text-dun-muted">
-        <p class="text-lg font-light">Los proyectos aparecerán acá una vez que los agregues en <code>src/content/projects/</code>.</p>
+        <p class="text-lg font-light">Próximamente.</p>
       </section>
     )
   }

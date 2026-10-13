@@ -1,6 +1,5 @@
 ---
 title: "Reforma Villa Ortúzar"
-description: "Reforma integral de vivienda: demoliciones, integración de ambientes, nuevas instalaciones y cocina abierta."
 location: "Villa Ortúzar, CABA"
 year: 2026
 category: "Reforma"
@@ -18,7 +17,3 @@ gallery:
   - "../../assets/images/villa-ortuzar-2026/proceso-08.jpg"
   - "../../assets/images/villa-ortuzar-2026/proceso-09.jpg"
 ---
-
-### Sobre este proyecto
-
-Reforma integral de vivienda en Villa Ortúzar. Proyecto y coordinación de obra enfocado en abrir los ambientes, renovar instalaciones y optimizar la entrada de luz natural para transformar el espacio manteniendo su identidad barrial.

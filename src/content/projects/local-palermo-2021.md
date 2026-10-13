@@ -1,6 +1,5 @@
 ---
 title: "Local Palermo"
-description: "Interiorismo y adecuación comercial: diseño lumínico, renovación de solados y equipamiento a medida en Palermo Soho."
 location: "Palermo, CABA"
 year: 2021
 category: "Interiorismo"
@@ -15,7 +14,3 @@ gallery:
   - "../../assets/images/local-palermo-2021/proceso-02.jpg"
   - "../../assets/images/local-palermo-2021/proceso-03.jpeg"
 ---
-
-### Sobre este proyecto
-
-Proyecto de interiorismo y adecuación comercial para local gastronómico en Palermo Soho. Intervención en solados, diseño lumínico y equipamiento comercial optimizando el flujo de trabajo y la experiencia de los clientes.
