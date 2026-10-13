@@ -3,7 +3,7 @@ title: "Local Palermo"
 location: "Palermo, CABA"
 year: 2021
 category: "Interiorismo"
-cover: "../../assets/images/local-palermo-2021/cover.jpeg"
+cover: "../../assets/images/local-palermo-2021/cover.jpg"
 before: "../../assets/images/local-palermo-2021/antes.jpg"
 after: "../../assets/images/local-palermo-2021/despues.jpg"
 gallery:

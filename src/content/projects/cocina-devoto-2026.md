@@ -11,7 +11,4 @@ gallery:
   - "../../assets/images/cocina-devoto-2026/final-01.jpg"
   - "../../assets/images/cocina-devoto-2026/final-02.jpg"
   - "../../assets/images/cocina-devoto-2026/proceso-01.jpg"
-  - "../../assets/images/cocina-devoto-2026/proceso-02.jpg"
-  - "../../assets/images/cocina-devoto-2026/proceso-03.jpg"
-  - "../../assets/images/cocina-devoto-2026/proceso-04.jpg"
 ---

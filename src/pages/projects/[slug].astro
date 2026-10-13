@@ -34,11 +34,11 @@ const planFull = plan ? (await getImage({ src: plan, width: 2000, format: 'webp'
 const all = await getCollection('projects');
 const projectOrder = (slug: string) => {
   const m: Record<string, number> = {
-    'cocina-devoto-2026': 1,
-    'villa-ortuzar-2026': 2,
-    'bano-caballito-2026': 3,
-    'bano-barracas-2026': 4,
-    'depto-saavedra-2025': 5,
+    'depto-saavedra-2025': 1,
+    'cocina-devoto-2026': 2,
+    'villa-ortuzar-2026': 3,
+    'bano-caballito-2026': 4,
+    'bano-barracas-2026': 5,
     'cocina-palermo-2025': 6,
     'cocina-villa-urquiza-2025': 7,
     'ph-saavedra-2025': 8,

@@ -12,7 +12,7 @@ Todo el material fotográfico vive en una carpeta de catálogo (`raw_content/OBR
 
 **Nombre de carpeta de obra:** `<año>.<tipo>.<barrio>.<otras>`, todo en MAYÚSCULAS, puntos como separador y espacios dentro de cada campo (por ejemplo `2026.COCINA.VILLA DEVOTO`). Si la obra abarca varios años va un rango (`2022-2023`). *Otras* es opcional y guarda lo que no entra en los otros campos (calle, edificio, nombre propio).
 
-**Subcarpetas de cada obra** (solo existen las que tienen contenido): `ANTES Y DESPUES` (pares `01. ANTES.jpg` / `01. DESPUES.jpg`), `PROCESO`, `FINALES` y `PROYECTO` (renders, planos, gráficos, diseño de mobiliario). Cada obra tiene además `00. PORTADA.jpg` (2000 px, copia reducida de una foto de la obra).
+**Subcarpetas de cada obra** (solo existen las que tienen contenido): `ANTES Y DESPUES` (pares `01. ANTES.jpg` / `01. DESPUES.jpg`), `PROCESO`, `FINALES` y `PROYECTO` (renders, planos, gráficos). En Cocina Palermo la carpeta se llama `DISEÑO DE MOBILIARIO`. Cada obra tiene además `00. PORTADA.jpg` (2000 px, copia reducida de una foto de la obra).
 
 Pendientes del catálogo:
 

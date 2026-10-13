@@ -11,5 +11,4 @@ gallery:
   - "../../assets/images/cocina-palermo-2025/mobiliario-02.jpg"
   - "../../assets/images/cocina-palermo-2025/proceso-01.jpg"
   - "../../assets/images/cocina-palermo-2025/proceso-02.jpg"
-  - "../../assets/images/cocina-palermo-2025/proceso-03.jpg"
 ---

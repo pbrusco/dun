@@ -15,6 +15,7 @@ gallery:
   - "../../assets/images/ph-saavedra-2025/final-05.jpg"
   - "../../assets/images/ph-saavedra-2025/final-06.jpg"
   - "../../assets/images/ph-saavedra-2025/final-07.jpg"
+  - "../../assets/images/ph-saavedra-2025/final-08.jpg"
   - "../../assets/images/ph-saavedra-2025/proceso-01.jpeg"
   - "../../assets/images/ph-saavedra-2025/proceso-02.jpg"
 ---
