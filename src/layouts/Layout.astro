@@ -1,4 +1,5 @@
 ---
+import Logo from '../components/Logo.astro';
 interface Props {
   title: string;
   description?: string;
@@ -81,7 +82,7 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -92,44 +93,65 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
 
     <!-- Nav -->
     <nav class="bg-dun-dark/90 backdrop-blur-sm border-b border-dun-cream/5 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-5 flex items-center justify-between gap-3">
-        <a href={`${base}/`} class="flex items-center hover:opacity-90 transition group shrink-0">
-          <div class="ring-1 ring-dun-cream/20 group-hover:ring-dun-cream/40 transition rounded-sm p-1">
-            <img src={`${base}/logo-header.webp`} alt="DUN estudio de arquitectura" class="h-9 md:h-[5rem] w-auto" />
-          </div>
+      <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-3 flex items-center justify-between gap-3">
+        <a href={`${base}/`} class="flex items-center min-h-11 hover:opacity-90 transition shrink-0" aria-label="DUN, ir al inicio">
+          <Logo class="h-8 md:h-11 w-auto" />
         </a>
-        <div class="flex items-center gap-3 md:gap-8 text-sm font-light tracking-wider text-dun-cream-dark">
+
+        <!-- Escritorio -->
+        <div class="hidden md:flex items-center gap-6 text-sm font-light tracking-wider text-dun-cream-dark">
           <a
             href={isHome ? '#proyectos' : `${base}/#proyectos`}
-            class:list={[
-              'hidden md:inline nav-link uppercase tracking-[0.2em] text-[11px]',
-              isHome && 'is-active',
-            ]}
-          >Proyectos</a>
+            class:list={['nav-link inline-flex items-center min-h-11 uppercase tracking-[0.2em] text-[11px]', isHome && 'is-active']}
+          >Obras</a>
           <a
             href={`${base}/obras-anteriores`}
-            class:list={[
-              'nav-link uppercase tracking-[0.18em] md:tracking-[0.2em] text-[10px] md:text-[11px] py-2.5',
-              isActive('/obras-anteriores') && 'is-active',
-            ]}
-          ><span class="md:hidden">Anteriores</span><span class="hidden md:inline">Obras anteriores</span></a>
+            class:list={['nav-link inline-flex items-center min-h-11 uppercase tracking-[0.2em] text-[11px]', isActive('/obras-anteriores') && 'is-active']}
+          >Obras anteriores</a>
           <a
             href={`${base}/sobre-mi`}
-            class:list={[
-              'nav-link uppercase tracking-[0.18em] md:tracking-[0.2em] text-[10px] md:text-[11px] py-2.5',
-              isActive('/sobre-mi') && 'is-active',
-            ]}
+            class:list={['nav-link inline-flex items-center min-h-11 uppercase tracking-[0.2em] text-[11px]', isActive('/sobre-mi') && 'is-active']}
           >Sobre mí</a>
           <a
             href={`${base}/contacto`}
             class:list={[
-              'cta-link border border-dun-cream text-dun-cream px-3 py-1.5 md:px-5 md:py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] hover:bg-dun-cream hover:text-dun-dark transition-all duration-300 font-normal whitespace-nowrap shadow-sm hover:shadow',
+              'cta-link inline-flex items-center min-h-11 border border-dun-cream text-dun-cream px-5 text-[11px] uppercase tracking-[0.2em] hover:bg-dun-cream hover:text-dun-dark transition-all duration-300 font-normal whitespace-nowrap',
               isActive('/contacto') && 'bg-dun-cream text-dun-dark',
             ]}
-          >
-            Contacto
-          </a>
+          >Contacto</a>
         </div>
+
+        <!-- Celular -->
+        <div class="flex md:hidden items-center gap-1">
+          <a
+            href={`${base}/contacto`}
+            class:list={[
+              'cta-link inline-flex items-center min-h-11 border border-dun-cream text-dun-cream px-4 text-[11px] uppercase tracking-[0.15em] font-normal whitespace-nowrap transition-all duration-300 hover:bg-dun-cream hover:text-dun-dark',
+              isActive('/contacto') && 'bg-dun-cream text-dun-dark',
+            ]}
+          >Contacto</a>
+          <button
+            type="button"
+            id="nav-toggle"
+            aria-expanded="false"
+            aria-controls="nav-panel"
+            aria-label="Abrir menú"
+            class="w-11 h-11 flex items-center justify-center text-dun-cream cursor-pointer"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path class="nav-ico-open" d="M3 6h14M3 14h14" />
+              <path class="nav-ico-close hidden" d="M4 4l12 12M16 4L4 16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="nav-panel" hidden class="md:hidden border-t border-dun-cream/10 bg-dun-dark">
+        <ul class="px-4 py-2">
+          <li><a href={isHome ? '#proyectos' : `${base}/#proyectos`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream">Obras</a></li>
+          <li><a href={`${base}/obras-anteriores`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream border-t border-dun-cream/10">Obras anteriores</a></li>
+          <li><a href={`${base}/sobre-mi`} class="flex items-center min-h-12 text-[13px] uppercase tracking-[0.2em] text-dun-cream border-t border-dun-cream/10">Sobre mí</a></li>
+        </ul>
       </div>
     </nav>
 
@@ -137,29 +159,27 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
       <slot />
     </main>
 
-    <footer class="bg-dun-cream text-dun-dark mt-24 md:mt-32 relative overflow-hidden">
+    <footer class="bg-dun-darker text-dun-cream border-t border-dun-cream/10 mt-24 md:mt-32 relative overflow-hidden">
       <!-- Decorative oversized wordmark -->
       <div aria-hidden="true" class="absolute inset-x-0 -bottom-6 md:-bottom-16 text-center pointer-events-none select-none">
-        <span class="font-thin tracking-[0.25em] text-[18vw] md:text-[14vw] leading-none text-dun-dark/[0.06]">
+        <span class="font-thin tracking-[0.25em] text-[18vw] md:text-[14vw] leading-none text-dun-cream/[0.04]">
           DUN
         </span>
       </div>
 
       <div class="relative max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 grid gap-12 md:grid-cols-12">
         <div class="md:col-span-5">
-          <div class="ring-1 ring-dun-dark/15 rounded-sm p-1 inline-block mb-6">
-            <img src={`${base}/logo-footer.webp`} alt="DUN estudio de arquitectura" class="h-16 md:h-20 w-auto" />
-          </div>
-          <p class="text-[11px] uppercase tracking-[0.25em] text-dun-dark/80 font-light leading-relaxed max-w-xs">
+          <a href={`${base}/`} class="inline-flex mb-6" aria-label="DUN, ir al inicio"><Logo class="h-12 md:h-16 w-auto" /></a>
+          <p class="text-[11px] uppercase tracking-[0.25em] text-dun-cream-dark font-light leading-relaxed max-w-xs">
             Estudio de arquitectura<br/>
             Reformas integrales · Restauración de patrimonio
           </p>
         </div>
 
         <div class="md:col-span-3">
-          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-dark/50 mb-4 font-light">Navegación</p>
-          <ul class="space-y-2.5 text-sm font-light">
-            <li><a href={`${base}/#proyectos`} class="footer-link">Proyectos</a></li>
+          <p class="text-[11px] uppercase tracking-[0.3em] text-dun-muted mb-4 font-light">Navegación</p>
+          <ul class="space-y-0 text-sm font-light">
+            <li><a href={`${base}/#proyectos`} class="footer-link">Obras</a></li>
             <li><a href={`${base}/obras-anteriores`} class="footer-link">Obras anteriores</a></li>
             <li><a href={`${base}/sobre-mi`} class="footer-link">Sobre mí</a></li>
             <li><a href={`${base}/contacto`} class="footer-link">Contacto</a></li>
@@ -167,30 +187,30 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
         </div>
 
         <div class="md:col-span-4">
-          <p class="text-[10px] uppercase tracking-[0.3em] text-dun-dark/50 mb-4 font-light">Estudio & Contacto</p>
-          <div class="text-sm font-light leading-relaxed space-y-2">
+          <p class="text-[11px] uppercase tracking-[0.3em] text-dun-muted mb-4 font-light">Estudio & Contacto</p>
+          <div class="text-sm font-light leading-relaxed space-y-1">
             <p>
               Daniela Estevez Vredjian<br/>
-              <span class="text-dun-dark/70">Buenos Aires · Argentina</span>
+              <span class="text-dun-cream-dark">Buenos Aires · Argentina</span>
             </p>
-            <ul class="space-y-1.5 text-xs text-dun-dark pt-1">
+            <ul class="space-y-0 text-sm text-dun-cream pt-1">
               <li>
                 <a
                   href="https://wa.me/5491162374256?text=Hola%20Daniela,%20me%20gustar%C3%ADa%20consultarte%20por%20un%20proyecto"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:underline inline-flex items-center gap-2"
+                  class="hover:underline inline-flex items-center gap-3 min-h-11"
                 >
-                  <span class="text-[9px] uppercase tracking-wider text-dun-dark/60 font-light w-16">WhatsApp</span>
+                  <span class="text-[11px] uppercase tracking-wider text-dun-muted font-light w-20 shrink-0">WhatsApp</span>
                   <span>+54 9 11 6237-4256</span>
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:hola.dun.arquitectura@gmail.com"
-                  class="hover:underline inline-flex items-center gap-2"
+                  class="hover:underline inline-flex items-center gap-3 min-h-11"
                 >
-                  <span class="text-[9px] uppercase tracking-wider text-dun-dark/60 font-light w-16">Email</span>
+                  <span class="text-[11px] uppercase tracking-wider text-dun-muted font-light w-20 shrink-0">Email</span>
                   <span>hola.dun.arquitectura@gmail.com</span>
                 </a>
               </li>
@@ -199,9 +219,9 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
                   href="https://www.instagram.com/dun.arquitectura/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:underline inline-flex items-center gap-2"
+                  class="hover:underline inline-flex items-center gap-3 min-h-11"
                 >
-                  <span class="text-[9px] uppercase tracking-wider text-dun-dark/60 font-light w-16">Instagram</span>
+                  <span class="text-[11px] uppercase tracking-wider text-dun-muted font-light w-20 shrink-0">Instagram</span>
                   <span>@dun.arquitectura</span>
                 </a>
               </li>
@@ -210,23 +230,24 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
         </div>
       </div>
 
-      <div class="relative border-t border-dun-dark/15">
-        <div class="max-w-7xl mx-auto px-6 md:px-10 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-[10px] uppercase tracking-[0.25em] text-dun-dark/60 font-light">
+      <div class="relative border-t border-dun-cream/10">
+        <div class="max-w-7xl mx-auto px-6 md:px-10 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-[11px] uppercase tracking-[0.25em] text-dun-muted font-light">
           <span>&copy; {new Date().getFullYear()} DUN · estudio de arquitectura</span>
-          <span class="font-editorial normal-case tracking-normal text-sm md:text-base text-dun-dark/85">
-            encontramos la forma de hacer <span class="text-dun-dark font-medium not-italic">hogar</span>
+          <span class="normal-case tracking-normal text-sm font-light text-dun-cream-dark">
+            encontramos la forma de hacer <span class="font-normal text-dun-cream">hogar</span>
           </span>
         </div>
       </div>
     </footer>
 
     <!-- Floating WhatsApp quick contact pill -->
-    <aside aria-label="Contacto rápido" class="fixed right-4 md:right-5 z-40" style="bottom: max(1rem, env(safe-area-inset-bottom))">
+    {!isActive('/contacto') && (
+    <aside id="wa-fab" aria-label="Contacto rápido" class:list={['fixed right-4 md:right-5 z-40 transition-all duration-500', isHome && 'opacity-0 translate-y-3 pointer-events-none']} style="bottom: max(1rem, env(safe-area-inset-bottom))">
       <a
         href="https://wa.me/5491162374256?text=Hola%20Daniela,%20me%20gustar%C3%ADa%20consultarte%20por%20un%20proyecto"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center gap-2.5 bg-dun-darker/95 hover:bg-dun-cream hover:text-dun-dark text-dun-cream border border-dun-cream/30 hover:border-dun-cream w-12 h-12 md:w-auto md:h-auto justify-center md:px-3.5 md:py-2.5 rounded-full backdrop-blur-md shadow-xl transition-all duration-300 group"
+        class="flex items-center gap-2.5 bg-dun-darker/95 hover:bg-dun-cream hover:text-dun-dark text-dun-cream border border-dun-cream/30 hover:border-dun-cream w-12 h-12 md:w-auto md:min-h-11 justify-center md:px-4 rounded-full backdrop-blur-md shadow-xl transition-all duration-300 group"
         title="Enviar mensaje por WhatsApp (+54 9 11 6237-4256)"
         aria-label="Escribir por WhatsApp"
       >
@@ -236,6 +257,7 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
         <span class="hidden md:inline text-[11px] uppercase tracking-[0.2em] font-light">WhatsApp</span>
       </a>
     </aside>
+    )}
 
     <script>
       // Scroll-reveal: any [data-reveal] gets a fade-up when it enters the viewport.
@@ -251,6 +273,33 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
         { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
       );
       document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+      // Menú del celular
+      const navBtn = document.getElementById('nav-toggle');
+      const navPanel = document.getElementById('nav-panel');
+      const setNav = (open: boolean) => {
+        if (!navBtn || !navPanel) return;
+        navPanel.hidden = !open;
+        navBtn.setAttribute('aria-expanded', String(open));
+        navBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        navBtn.querySelector('.nav-ico-open')?.classList.toggle('hidden', open);
+        navBtn.querySelector('.nav-ico-close')?.classList.toggle('hidden', !open);
+      };
+      navBtn?.addEventListener('click', () => setNav(navPanel?.hidden ?? false));
+      navPanel?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setNav(false)));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false); });
+
+      // En la home el botón de WhatsApp aparece recién al pasar la portada.
+      const fab = document.getElementById('wa-fab');
+      const hero = document.getElementById('portada');
+      if (fab && hero) {
+        const show = (on: boolean) => {
+          fab.classList.toggle('opacity-0', !on);
+          fab.classList.toggle('translate-y-3', !on);
+          fab.classList.toggle('pointer-events-none', !on);
+        };
+        new IntersectionObserver(([e]) => show(!e.isIntersecting), { threshold: 0.15 }).observe(hero);
+      }
     </script>
   </body>
 </html>
@@ -303,9 +352,11 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
     font-weight: 200;
   }
 
-  .font-editorial {
-    font-family: 'Cormorant Garamond', Garamond, Georgia, serif;
-    font-style: italic;
+
+  /* Foco visible para teclado */
+  :focus-visible {
+    outline: 2px solid var(--dun-cream-dark);
+    outline-offset: 3px;
   }
 
   /* Selection */
@@ -346,12 +397,15 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
   }
 
   .footer-link {
-    color: rgba(3, 59, 56, 0.75);
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: rgba(236, 234, 219, 0.8);
     transition: color 200ms ease;
     position: relative;
   }
   .footer-link:hover {
-    color: var(--dun-dark);
+    color: var(--dun-cream);
   }
   .footer-link::before {
     content: '— ';

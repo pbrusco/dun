@@ -1,0 +1,28 @@
+---
+// Marca DUN en SVG: nítida a cualquier tamaño y sin fondo propio.
+interface Props {
+  class?: string;
+  tone?: 'light' | 'dark';
+}
+const { class: className = '', tone = 'light' } = Astro.props;
+const ink = tone === 'light' ? '#eceadb' : '#033b38';
+const guide = tone === 'light' ? '#cca067' : '#033b38';
+---
+
+<svg class={className} viewBox="160 430 760 220" fill="none" role="img" aria-label="DUN estudio de arquitectura">
+  <g stroke={guide} stroke-width="1.5" opacity="0.35">
+    <circle cx="308" cy="539" r="97" />
+    <circle cx="540" cy="539" r="97" />
+    <circle cx="772" cy="539" r="97" />
+  </g>
+  <path d="M174 636H906" stroke={guide} stroke-width="2" opacity="0.8" />
+  <g stroke={ink} stroke-width="18">
+    <path d="M308 451A88 88 0 1 1 292.7 625.7" />
+    <path d="M452 539A88 88 0 0 0 628 539" />
+    <path d="M684 636A88 88 0 0 1 860 636M681 578V636" />
+  </g>
+  <g fill="#a58a72">
+    <circle cx="762" cy="602" r="5" /><path d="M754 636V618Q754 609 764 609Q774 609 774 618V636Z" />
+    <circle cx="799" cy="591" r="6" /><path d="M788 636V612Q788 600 799 600Q811 600 811 612V636Z" />
+  </g>
+</svg>
