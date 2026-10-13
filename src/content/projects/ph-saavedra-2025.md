@@ -17,8 +17,6 @@ gallery:
   - "../../assets/images/ph-saavedra-2025/final-07.jpg"
   - "../../assets/images/ph-saavedra-2025/proceso-01.jpeg"
   - "../../assets/images/ph-saavedra-2025/proceso-02.jpg"
-  - "../../assets/images/ph-saavedra-2025/proceso-03.jpg"
-  - "../../assets/images/ph-saavedra-2025/proceso-04.jpg"
 ---
 
 ### Sobre este proyecto

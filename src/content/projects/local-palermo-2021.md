@@ -4,7 +4,6 @@ location: "Palermo, CABA"
 year: 2021
 category: "Interiorismo"
 cover: "../../assets/images/local-palermo-2021/cover.jpeg"
-plan: "../../assets/images/local-palermo-2021/plano.jpg"
 before: "../../assets/images/local-palermo-2021/antes.jpg"
 after: "../../assets/images/local-palermo-2021/despues.jpg"
 gallery:
