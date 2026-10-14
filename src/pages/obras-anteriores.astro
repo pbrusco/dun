@@ -68,7 +68,7 @@ const sections = [
     year: '2020',
     title: 'Aeropuerto Ministro Pistarini',
     kicker: 'Gran escala',
-    description: 'Instalaciones y cubiertas — Ezeiza.',
+    description: 'Instalaciones.',
     images: [ez1, ez2, ez3, ez4],
   },
   {
@@ -148,10 +148,10 @@ const fulls = await Promise.all(sections.map((s) => Promise.all(s.images.map(asy
           const big = j === 0;
           const span = big ? 'col-span-6 md:col-span-4 aspect-[16/10]' : 'col-span-3 md:col-span-2 aspect-[4/3]';
           return (
-            <button type="button" data-lightbox={s.id} data-full={fulls[i][j]} data-alt={`Obra ${s.title} — ${j + 1}`} aria-label={`Ampliar foto ${j + 1} de ${s.title}`} class={`img-frame relative block cursor-zoom-in ${span}`}>
+            <button type="button" data-lightbox={s.id} data-full={fulls[i][j]} data-alt={`Obra ${s.title}, foto ${j + 1}`} aria-label={`Ampliar foto ${j + 1} de ${s.title}`} class={`img-frame relative block cursor-zoom-in ${span}`}>
               <Image
                 src={img}
-                alt={`Obra ${s.title} — ${j + 1}`}
+                alt={`Obra ${s.title}, foto ${j + 1}`}
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1100ms] hover:scale-[1.03]"
               />
               <span class="absolute left-3 bottom-2 text-[11px] uppercase tracking-[0.25em] text-dun-cream z-10">
