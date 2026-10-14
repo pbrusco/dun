@@ -207,9 +207,9 @@ const filters = [
         </nav>
 
         <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-12 md:gap-y-14">
-          {projects.map((project, i) => (
-            <div class={i === 0 ? 'md:col-span-2 lg:col-span-3' : ''} data-project-wrap>
-              <ProjectCard project={project} variant={i === 0 ? 'featured' : 'default'} />
+          {projects.map((project) => (
+            <div data-project-wrap>
+              <ProjectCard project={project} />
             </div>
           ))}
         </div>
