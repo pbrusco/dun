@@ -95,7 +95,7 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
     <nav class="bg-dun-dark/90 backdrop-blur-sm border-b border-dun-cream/5 sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-3 flex items-center justify-between gap-3">
         <a href={`${base}/`} class="flex items-center min-h-11 hover:opacity-90 transition shrink-0" aria-label="DUN, ir al inicio">
-          <Logo class="h-8 md:h-11 w-auto" />
+          <Logo class="h-7 md:h-11 w-auto" />
         </a>
 
         <!-- Escritorio -->
@@ -122,11 +122,15 @@ const canonicalUrl = `https://dunarquitectura.com.ar${path === '/' ? '' : path}`
         </div>
 
         <!-- Celular -->
-        <div class="flex md:hidden items-center gap-1">
+        <div class="flex md:hidden items-center gap-0.5">
+          <a
+            href={`${base}/sobre-mi`}
+            class:list={['nav-link inline-flex items-center min-h-11 px-1.5 text-[11px] uppercase tracking-[0.06em] whitespace-nowrap', isActive('/sobre-mi') && 'is-active']}
+          >Sobre mí</a>
           <a
             href={`${base}/contacto`}
             class:list={[
-              'cta-link inline-flex items-center min-h-11 border border-dun-cream text-dun-cream px-4 text-[11px] uppercase tracking-[0.15em] font-normal whitespace-nowrap transition-all duration-300 hover:bg-dun-cream hover:text-dun-dark',
+              'cta-link inline-flex items-center min-h-11 border border-dun-cream text-dun-cream px-2.5 text-[11px] uppercase tracking-[0.06em] font-normal whitespace-nowrap transition-all duration-300 hover:bg-dun-cream hover:text-dun-dark',
               isActive('/contacto') && 'bg-dun-cream text-dun-dark',
             ]}
           >Contacto</a>
