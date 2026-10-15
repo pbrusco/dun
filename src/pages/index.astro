@@ -3,29 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import { projectOrder } from '../lib/project-order';
 import bannerTrayectoria from '../assets/images/obras-anteriores/manzana-luces/01.jpg';
 
 const allProjects = await getCollection('projects');
-const projectOrder = (slug: string) => {
-  const m: Record<string, number> = {
-    'depto-saavedra-2025': 1,
-    'cocina-devoto-2026': 2,
-    'villa-ortuzar-2026': 3,
-    'bano-caballito-2026': 4,
-    'bano-barracas-2026': 5,
-    'cocina-palermo-2025': 6,
-    'cocina-villa-urquiza-2025': 7,
-    'ph-saavedra-2025': 8,
-    'depto-corrientes-2025': 9,
-    'bano-ph-saavedra-2025': 10,
-    'bano-palermo-2025': 11,
-    'bano-olivos-2025': 12,
-    'placard-villa-urquiza-2025': 13,
-    'placard-villa-pueyrredon-2025': 14,
-    'local-palermo-2021': 15,
-  };
-  return m[slug] ?? 99;
-};
 const projects = allProjects.sort((a, b) => projectOrder(a.slug) - projectOrder(b.slug));
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -129,9 +110,9 @@ const filters = [
       </g>
     </svg>
       <div class="grid justify-items-center shrink-0 pb-2">
-        <a href="#proyectos" data-goto="cocinas" class="cap col-start-1 row-start-1 inline-flex items-center min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark hover:text-dun-cream" style="--g:0">Cocinas →</a>
-        <a href="#proyectos" data-goto="banos" class="cap col-start-1 row-start-1 inline-flex items-center min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark hover:text-dun-cream" style="--g:1">Baños →</a>
-        <a href="#proyectos" data-goto="mobiliario" class="cap col-start-1 row-start-1 inline-flex items-center min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark hover:text-dun-cream" style="--g:2">Placards →</a>
+        <a href="#proyectos" data-goto="cocinas" class="cap col-start-1 row-start-1 inline-flex items-center min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark hover:text-dun-cream" style="--g:0">Cocinas <span aria-hidden="true">→</span></a>
+        <a href="#proyectos" data-goto="banos" class="cap col-start-1 row-start-1 inline-flex items-center min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark hover:text-dun-cream" style="--g:1">Baños <span aria-hidden="true">→</span></a>
+        <a href="#proyectos" data-goto="mobiliario" class="cap col-start-1 row-start-1 inline-flex items-center min-h-11 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark hover:text-dun-cream" style="--g:2">Placards <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
@@ -182,14 +163,15 @@ const filters = [
   {
     projects.length > 0 && (
       <section id="proyectos" class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-16 md:pb-24 scroll-mt-16">
-        <nav aria-label="Filtro de obras" class="mb-8 md:mb-12 flex flex-wrap items-center gap-2">
+        <h2 class="sr-only">Obras</h2>
+        <div role="group" aria-label="Filtrar obras" class="mb-8 md:mb-12 flex flex-wrap items-center gap-2">
           {filters.map((f, i) => (
             <button
               type="button"
               data-filter-btn={f.key}
               aria-pressed={i === 0 ? 'true' : 'false'}
               class:list={[
-                'filter-btn px-3.5 min-h-11 text-[11px] uppercase tracking-[0.12em] rounded-full border transition-all duration-300 cursor-pointer whitespace-nowrap',
+                'filter-btn px-3.5 min-h-11 text-[11px] uppercase tracking-[0.12em] rounded-full border transition-colors duration-300 cursor-pointer whitespace-nowrap',
                 i === 0
                   ? 'border-dun-cream bg-dun-cream text-dun-dark font-normal'
                   : 'border-dun-cream/30 text-dun-cream-dark hover:border-dun-cream/60 hover:text-dun-cream font-light',
@@ -200,11 +182,12 @@ const filters = [
           ))}
           <a
             href={`${base}/obras-anteriores`}
-            class="px-3.5 min-h-11 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] rounded-full border border-dun-cream-dark/60 text-dun-cream-dark hover:bg-dun-cream-dark hover:text-dun-dark transition-all duration-300 whitespace-nowrap"
+            class="px-3.5 min-h-11 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] rounded-full border border-dun-cream-dark/60 text-dun-cream-dark hover:bg-dun-cream-dark hover:text-dun-dark transition-colors duration-300 whitespace-nowrap"
           >
             Gran escala y patrimonio <span aria-hidden="true">→</span>
           </a>
-        </nav>
+        </div>
+        <p id="filter-status" role="status" class="sr-only"></p>
 
         <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-12 md:gap-y-14">
           {projects.map((project) => (
@@ -223,14 +206,14 @@ const filters = [
   <section class="max-w-7xl mx-auto px-6 md:px-10 pb-20 md:pb-32" data-reveal>
     <a
       href={`${base}/obras-anteriores`}
-      class="group relative block p-8 md:p-16 border border-dun-cream/20 hover:border-dun-cream/50 bg-dun-darker/40 transition-all duration-700 overflow-hidden"
+      class="group relative block p-8 md:p-16 border border-dun-cream/20 hover:border-dun-cream/50 bg-dun-darker/40 transition-colors duration-700 overflow-hidden"
     >
       <!-- Background historic monument photo with duotone overlay -->
       <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <Image
           src={bannerTrayectoria}
-          alt="Restauración de patrimonio histórico - Manzana de las Luces"
-          class="w-full h-full object-cover grayscale opacity-15 group-hover:opacity-25 group-hover:scale-105 transition-all duration-1000 ease-out"
+          alt=""
+          class="w-full h-full object-cover grayscale opacity-15 group-hover:opacity-25 group-hover:scale-105 transition-[opacity,transform] duration-1000 ease-out"
         />
         <div class="absolute inset-0 bg-gradient-to-r from-dun-darker via-dun-darker/85 to-transparent mix-blend-multiply"></div>
       </div>
@@ -254,9 +237,9 @@ const filters = [
           </h2>
         </div>
         <div class="md:col-span-4 md:text-right">
-          <span class="inline-flex items-center gap-3 px-6 py-3.5 border border-dun-cream/40 group-hover:border-dun-cream group-hover:bg-dun-cream group-hover:text-dun-dark text-[11px] uppercase tracking-[0.25em] text-dun-cream transition-all duration-500 shadow-sm">
+          <span class="inline-flex items-center gap-3 px-6 py-3.5 border border-dun-cream/40 group-hover:border-dun-cream group-hover:bg-dun-cream group-hover:text-dun-dark text-[11px] uppercase tracking-[0.25em] text-dun-cream transition-colors duration-500 shadow-sm">
             <span>Ver gran escala y patrimonio</span>
-            <span class="text-sm">→</span>
+            <span class="text-sm" aria-hidden="true">→</span>
           </span>
         </div>
       </div>
@@ -282,7 +265,6 @@ const filters = [
   pauseBtn?.addEventListener('click', () => {
     userPaused = !userPaused;
     pauseBtn.setAttribute('aria-pressed', String(userPaused));
-    pauseBtn.setAttribute('aria-label', userPaused ? 'Reanudar animación' : 'Pausar animación');
     pauseBtn.querySelector('.pause-ico')?.classList.toggle('hidden', userPaused);
     pauseBtn.querySelector('.play-ico')?.classList.toggle('hidden', !userPaused);
     applyPause();
@@ -304,31 +286,37 @@ const filters = [
   const on = ['bg-dun-cream', 'text-dun-dark', 'border-dun-cream', 'font-normal'];
   const off = ['text-dun-cream-dark', 'border-dun-cream/30', 'font-light'];
 
+  const status = document.getElementById('filter-status');
+  const apply = (target: string) => {
+    let n = 0;
+    filterBtns.forEach((b) => {
+      const active = b.dataset.filterBtn === target;
+      b.setAttribute('aria-pressed', String(active));
+      b.classList.remove(...(active ? off : on));
+      b.classList.add(...(active ? on : off));
+    });
+    wraps.forEach((w) => {
+      const card = w.querySelector<HTMLElement>('[data-project-card]');
+      const visible = target === 'todos' || card?.dataset.group === target;
+      w.style.display = visible ? '' : 'none';
+      if (visible) n++;
+    });
+    if (status) status.textContent = `${n} obras`;
+  };
+
+  // El filtro vive en la URL (?f=cocinas) para poder compartirlo.
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const target = btn.dataset.filterBtn;
-      filterBtns.forEach((b) => {
-        const active = b === btn;
-        b.setAttribute('aria-pressed', String(active));
-        b.classList.remove(...(active ? off : on));
-        b.classList.add(...(active ? on : off));
-      });
-      wraps.forEach((w) => {
-        const card = w.querySelector<HTMLElement>('[data-project-card]');
-        const visible = target === 'todos' || card?.dataset.group === target;
-        w.style.display = visible ? '' : 'none';
-      });
+      const target = btn.dataset.filterBtn!;
+      apply(target);
+      history.replaceState(null, '', target === 'todos' ? location.pathname : `?f=${target}`);
     });
   });
+  const initial = new URLSearchParams(location.search).get('f');
+  if (initial && [...filterBtns].some((b) => b.dataset.filterBtn === initial)) apply(initial);
 </script>
 
 <style>
-  /* Lexend has no native italic — use a refined synthesized slant only where we want a typographic accent */
-  .italic-faux {
-    font-style: italic;
-  }
-
-  /* Hide scrollbar for category pills on horizontal scroll */
   /* Ciclo de 39 s: cocina → baño → placard (13 s cada uno) */
   .plan .ln {
     stroke-dasharray: 1;
@@ -503,11 +491,4 @@ const filters = [
     .logo .lg-c, .logo .lg-f { animation: none; opacity: 1; }
   }
 
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
 </style>

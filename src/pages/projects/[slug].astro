@@ -5,6 +5,7 @@ import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
 import Lightbox from '../../components/Lightbox.astro';
+import { projectOrder } from '../../lib/project-order';
 
 export async function getStaticPaths() {
   const entries = await getCollection('projects');
@@ -23,6 +24,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { title, location, year, category, plan, before, after, gallery } = entry.data;
 
 const hasBeforeAfter = before && after;
+const description = `${title}${location ? `, ${location}` : ''}${year ? ` (${year})` : ''}. Obra de DUN · Estudio de arquitectura.`;
 
 // Versión grande de cada foto para el visor
 const full = await Promise.all(
@@ -32,32 +34,12 @@ const planFull = plan ? (await getImage({ src: plan, width: 2000, format: 'webp'
 
 // Mismo orden que la home, para que "siguiente" coincida con lo que se ve al navegar.
 const all = await getCollection('projects');
-const projectOrder = (slug: string) => {
-  const m: Record<string, number> = {
-    'depto-saavedra-2025': 1,
-    'cocina-devoto-2026': 2,
-    'villa-ortuzar-2026': 3,
-    'bano-caballito-2026': 4,
-    'bano-barracas-2026': 5,
-    'cocina-palermo-2025': 6,
-    'cocina-villa-urquiza-2025': 7,
-    'ph-saavedra-2025': 8,
-    'depto-corrientes-2025': 9,
-    'bano-ph-saavedra-2025': 10,
-    'bano-palermo-2025': 11,
-    'bano-olivos-2025': 12,
-    'placard-villa-urquiza-2025': 13,
-    'placard-villa-pueyrredon-2025': 14,
-    'local-palermo-2021': 15,
-  };
-  return m[slug] ?? 99;
-};
 const ordered = [...all].sort((a, b) => projectOrder(a.slug) - projectOrder(b.slug));
 const idx = ordered.findIndex((p) => p.slug === entry.slug);
 const next = ordered[(idx + 1) % ordered.length];
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <article>
     <!-- Encabezado -->
     <section class="max-w-7xl mx-auto px-6 md:px-10 pt-8 md:pt-14 pb-10 md:pb-16">
@@ -80,7 +62,7 @@ const next = ordered[(idx + 1) % ordered.length];
     <!-- Plano / proyecto -->
     {plan && (
       <section class="max-w-7xl mx-auto px-6 md:px-10 pb-10 md:pb-16" data-reveal>
-        <button type="button" data-lightbox="plan" data-full={planFull} data-alt={`Proyecto, ${title}`} class="img-frame block w-full bg-dun-darker cursor-zoom-in">
+        <button type="button" data-lightbox="plan" data-full={planFull} data-alt={`Proyecto, ${title}`} aria-label={`Ampliar proyecto de ${title}`} class="img-frame block w-full bg-dun-darker cursor-zoom-in">
           <Image src={plan} alt={`Proyecto, ${title}`} class="w-full block" />
         </button>
       </section>
@@ -144,7 +126,7 @@ const next = ordered[(idx + 1) % ordered.length];
             </div>
             <div class="col-span-3 md:col-span-3 text-right">
               <span class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark group-hover:text-dun-cream transition">
-                <span class="hidden sm:block w-8 h-px bg-current group-hover:w-16 transition-all duration-500"></span>
+                <span class="hidden sm:block w-16 h-px bg-current origin-right scale-x-50 group-hover:scale-x-100 transition-transform duration-500"></span>
                 Ver
               </span>
             </div>

@@ -1,14 +1,12 @@
 ---
-// Visor de fotos a pantalla completa.
+// Visor de fotos a pantalla completa (<dialog> nativo: foco atrapado, Esc y fondo inerte).
 // Uso: en cada foto, un <button data-lightbox="grupo" data-full="URL" data-alt="texto">.
 // Las fotos con el mismo "grupo" se recorren con flechas, teclado o deslizando.
 ---
 
-<div
+<dialog
   id="lightbox"
-  class="fixed inset-0 z-[100] hidden bg-dun-darker/95 backdrop-blur-sm"
-  role="dialog"
-  aria-modal="true"
+  class="m-0 p-0 border-0 w-full h-full max-w-none max-h-none overscroll-contain bg-dun-darker/95 text-dun-cream backdrop-blur-sm"
   aria-label="Visor de fotos"
 >
   <button type="button" data-lb-close class="absolute top-3 right-3 md:top-5 md:right-5 w-12 h-12 flex items-center justify-center text-dun-cream text-3xl leading-none hover:text-white" aria-label="Cerrar">×</button>
@@ -17,11 +15,11 @@
   <div class="absolute inset-0 flex items-center justify-center px-12 md:px-24 py-16" data-lb-stage>
     <img data-lb-img alt="" class="max-w-full max-h-full object-contain select-none" />
   </div>
-  <p data-lb-count class="absolute bottom-4 inset-x-0 text-center text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark"></p>
-</div>
+  <p data-lb-count aria-live="polite" class="absolute bottom-4 inset-x-0 text-center text-[11px] uppercase tracking-[0.3em] text-dun-cream-dark"></p>
+</dialog>
 
 <script>
-  const box = document.getElementById('lightbox') as HTMLElement;
+  const box = document.getElementById('lightbox') as HTMLDialogElement;
   const img = box.querySelector('[data-lb-img]') as HTMLImageElement;
   const count = box.querySelector('[data-lb-count]') as HTMLElement;
   const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-lightbox]'));
@@ -45,29 +43,26 @@
     group = triggers.filter((x) => x.dataset.lightbox === t.dataset.lightbox);
     i = group.indexOf(t);
     show();
-    box.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    box.querySelector<HTMLElement>('[data-lb-close]')!.focus();
+    box.showModal();
   }
-  function close() {
-    box.classList.add('hidden');
+  // Se dispara también con Esc (nativo).
+  box.addEventListener('close', () => {
     document.body.style.overflow = '';
-    img.src = '';
+    img.removeAttribute('src');
     opener?.focus();
-  }
+  });
   const go = (d: number) => { i = (i + d + group.length) % group.length; show(); };
 
   triggers.forEach((t) => t.addEventListener('click', () => open(t)));
-  box.querySelector('[data-lb-close]')!.addEventListener('click', close);
+  box.querySelector('[data-lb-close]')!.addEventListener('click', () => box.close());
   box.querySelector('[data-lb-prev]')!.addEventListener('click', () => go(-1));
   box.querySelector('[data-lb-next]')!.addEventListener('click', () => go(1));
   box.addEventListener('click', (e) => {
     const el = e.target as HTMLElement;
-    if (el === box || el.hasAttribute('data-lb-stage')) close();
+    if (el === box || el.hasAttribute('data-lb-stage')) box.close();
   });
-  document.addEventListener('keydown', (e) => {
-    if (box.classList.contains('hidden')) return;
-    if (e.key === 'Escape') close();
+  box.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') go(-1);
     if (e.key === 'ArrowRight') go(1);
   });
