@@ -13,7 +13,7 @@ module.exports = {
           darker: '#022b29',
           cream: '#eceadb',
           'cream-dark': '#cca067',
-          muted: '#a1836b',
+          muted: '#bd9f84',
         },
       },
     },
