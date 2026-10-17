@@ -16,7 +16,7 @@ Todo el material fotográfico vive en una carpeta de catálogo (`raw_content/OBR
 
 Pendientes del catálogo:
 
-- [ ] Recuperar el gráfico `-02` de **PH Saavedra** (la numeración de los gráficos quedó corrida a 01–03 porque el original se perdió).
+- [x] ~~Recuperar el gráfico `-02` de **PH Saavedra**~~ — Eliminados los gráficos 01, 02 y 03 a pedido del estudio.
 - [ ] Decidir si la foto `E.jpg` de **Ezeiza** (selfie con casco) puede quedar en material público.
 - [ ] Confirmar los datos que se **dedujeron** y no vinieron del estudio: barrios de Aeroparque (Palermo), Manzana de las Luces (Monserrat) y Gimnasios Fitter (Caballito, por el cartel del local); año 2025 del baño de Palermo; año 2025 del placard de Villa Pueyrredon (el de Villa Urquiza lo indicó el estudio).
 - [ ] Confirmar la portada de las 5 obras en las que se eligió una nueva: los baños de PH Saavedra, Palermo, Olivos y Barracas, y el placard de Villa Urquiza.
@@ -83,7 +83,7 @@ Cada ítem indica la carpeta del catálogo (sección 0).
 #### PH Saavedra · 2025 — `2025.REFORMA.SAAVEDRA.PH`
 - ✅ 7 fotos finales de alta resolución integradas (portada y galería)
 - [ ] Datos técnicos
-- [ ] Gráfico `-02` faltante (ver sección 0)
+- [x] ~~Gráficos 01, 02 y 03~~ — Eliminados a pedido del estudio
 
 #### Departamento Av. Corrientes · Centro · 2025 — `2025.REFORMA.CENTRO.AV CORRIENTES`
 - ✅ Foto final de obra sumada

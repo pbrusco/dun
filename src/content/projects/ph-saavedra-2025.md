@@ -4,7 +4,6 @@ location: "Saavedra, CABA"
 year: 2025
 category: "Reforma"
 cover: "../../assets/images/ph-saavedra-2025/cover.jpg"
-plan: "../../assets/images/ph-saavedra-2025/plano.jpg"
 before: "../../assets/images/ph-saavedra-2025/antes.jpg"
 after: "../../assets/images/ph-saavedra-2025/despues.jpg"
 gallery:
